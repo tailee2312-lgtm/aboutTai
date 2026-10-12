@@ -4,9 +4,9 @@
  const $=s=>document.querySelector(s), audio=window.PORTALVERSE_AUDIO, tracks=window.PORTALVERSE_TRACKS||[];
  if(!audio||!tracks.length)return;
  const localized={
-  vi:{title:'CHỌN MỘT VÌ SAO',lead:'Chọn một ca khúc từ bản đồ sao.', mood:'CHỌN TÂM TRẠNG',dream:'Mơ màng',energy:'Năng lượng',love:'Lãng mạn',memory:'Hoài niệm',surprise:'Bất ngờ',wave:'SÓNG ÂM TRỰC TIẾP',real:'5 CA KHÚC · TÀI LÊ', fullscreen:'KHÔNG GIAN NGHE NHẠC',moodNote:'Gợi ý theo màu sắc cảm xúc của bài hát',soon:'MV đang được cập nhật',closing:'Cảm ơn bạn đã lắng nghe.'},
-  en:{title:'PICK A STAR',lead:'Select a track from the constellation.',mood:'CHOOSE YOUR MOOD',dream:'Dreamy',energy:'Energy',love:'Romance',memory:'Nostalgia',surprise:'Surprise',wave:'LIVE AUDIO WAVE',real:'5 TRACKS · TÀI LÊ',fullscreen:'IMMERSIVE LISTENING',moodNote:'A soundtrack to your mood',soon:'Music videos are coming soon',closing:'Thanks for listening.'},
-  ja:{title:'星を選んで',lead:'星を選んで楽曲を再生できます。',mood:'気分で選ぶ',dream:'夢心地',energy:'元気',love:'ロマンチック',memory:'思い出',surprise:'おまかせ',wave:'ライブ音声ビジュアライザー',real:'5曲 · TÀI LÊ',fullscreen:'音楽の世界に浸る',moodNote:'気分に合わせて曲を探そう',soon:'MVは準備中です',closing:'ご視聴ありがとうございます。'}
+  vi:{title:'TINH HÀ ÂM NHẠC',lead:'', mood:'CHỌN TÂM TRẠNG',dream:'Mơ màng',energy:'Năng lượng',love:'Lãng mạn',memory:'Hoài niệm',surprise:'Bất ngờ',wave:'SÓNG ÂM TRỰC TIẾP',real:'5 CA KHÚC · TÀI LÊ', fullscreen:'KHÔNG GIAN NGHE NHẠC',moodNote:'Gợi ý theo màu sắc cảm xúc của bài hát',soon:'MV đang được cập nhật',closing:'Cảm ơn bạn đã lắng nghe.'},
+  en:{title:'MUSIC ORBITS',lead:'',mood:'CHOOSE YOUR MOOD',dream:'Dreamy',energy:'Energy',love:'Romance',memory:'Nostalgia',surprise:'Surprise',wave:'LIVE AUDIO WAVE',real:'5 TRACKS · TÀI LÊ',fullscreen:'IMMERSIVE LISTENING',moodNote:'A soundtrack to your mood',soon:'Music videos are coming soon',closing:'Thanks for listening.'},
+  ja:{title:'音楽の軌道',lead:'',mood:'気分で選ぶ',dream:'夢心地',energy:'元気',love:'ロマンチック',memory:'思い出',surprise:'おまかせ',wave:'ライブ音声ビジュアライザー',real:'5曲 · TÀI LÊ',fullscreen:'音楽の世界に浸る',moodNote:'気分に合わせて曲を探そう',soon:'MVは準備中です',closing:'ご視聴ありがとうございます。'}
  };
  const lang=()=>localized[document.documentElement.lang]||localized.vi;
  const safeIndex=()=>Math.max(0,Math.min(tracks.length-1,Number(window.PORTALVERSE_CURRENT_TRACK?.()??0)));
@@ -26,7 +26,7 @@
  // Constellation map with five accessible song selections.
  const layout=$('.music-layout');
  const sky=document.createElement('section');sky.className='v14-starfield-section';sky.setAttribute('aria-label','Interactive music constellation');
- sky.innerHTML=`<div class="v14-starhead"><h2 data-v14="title"></h2><p data-v14="lead"></p></div><div class="v14-constellation" id="v14-constellation"><div class="v14-orbit-ring ring-a"></div><div class="v14-orbit-ring ring-b"></div><span class="v14-skyline">TÀI LÊ<br><small>✳ MUSIC UNIVERSE</small></span></div><div class="v14-moods"><div class="v14-moods-head"><h3 data-v14="mood"></h3><p data-v14="moodNote"></p></div><div class="v14-mood-buttons" id="v14-mood-buttons"></div></div>`;
+ sky.innerHTML=`<div class="v14-starhead"><h2 data-v14="title"></h2><p data-v14="lead"></p></div><div class="v14-constellation" id="v14-constellation"><div class="v14-orbit-ring ring-a"></div><div class="v14-orbit-ring ring-b"></div><div class="v14-orbit-ring ring-c"></div><span class="v14-skyline">TÀI LÊ<br><small>MUSIC · ORBITAL SYSTEM</small></span></div><div class="v14-moods"><div class="v14-moods-head"><h3 data-v14="mood"></h3><p data-v14="moodNote"></p></div><div class="v14-mood-buttons" id="v14-mood-buttons"></div></div>`;
  layout?.insertAdjacentElement('afterend',sky);
  const starRoot=$('#v14-constellation');
  tracks.forEach((track,i)=>{

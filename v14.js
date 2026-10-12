@@ -4,9 +4,9 @@
  const $=s=>document.querySelector(s), audio=window.PORTALVERSE_AUDIO, tracks=window.PORTALVERSE_TRACKS||[];
  if(!audio||!tracks.length)return;
  const localized={
-  vi:{title:'CHỌN MỘT VÌ SAO',lead:'Mỗi ngôi sao là một ca khúc. Chạm vào bất kỳ đâu để bắt đầu hành trình âm nhạc của Tài.', mood:'CHỌN TÂM TRẠNG',dream:'Mơ màng',energy:'Năng lượng',love:'Lãng mạn',memory:'Hoài niệm',surprise:'Bất ngờ',wave:'SÓNG ÂM TRỰC TIẾP',real:'5 CA KHÚC · TÀI LÊ', fullscreen:'KHÔNG GIAN NGHE NHẠC',moodNote:'Gợi ý theo màu sắc cảm xúc của bài hát',soon:'MV đang được cập nhật',closing:'Cảm ơn bạn đã lắng nghe ♡'},
-  en:{title:'PICK A STAR',lead:'Every star hides one of my songs. Pick one and step into the music.',mood:'CHOOSE YOUR MOOD',dream:'Dreamy',energy:'Energy',love:'Romance',memory:'Nostalgia',surprise:'Surprise',wave:'LIVE AUDIO WAVE',real:'5 TRACKS · TÀI LÊ',fullscreen:'IMMERSIVE LISTENING',moodNote:'A soundtrack to your mood',soon:'Music videos are coming soon',closing:'Thanks for listening ♡'},
-  ja:{title:'星を選んで',lead:'星の一つひとつに曲が隠れています。気になる星をタップしてみて。',mood:'気分で選ぶ',dream:'夢心地',energy:'元気',love:'ロマンチック',memory:'思い出',surprise:'おまかせ',wave:'ライブ音声ビジュアライザー',real:'5曲 · TÀI LÊ',fullscreen:'音楽の世界に浸る',moodNote:'気分に合わせて曲を探そう',soon:'MVは準備中です',closing:'聴いてくれてありがとう ♡'}
+  vi:{title:'CHỌN MỘT VÌ SAO',lead:'Chọn một ca khúc từ bản đồ sao.', mood:'CHỌN TÂM TRẠNG',dream:'Mơ màng',energy:'Năng lượng',love:'Lãng mạn',memory:'Hoài niệm',surprise:'Bất ngờ',wave:'SÓNG ÂM TRỰC TIẾP',real:'5 CA KHÚC · TÀI LÊ', fullscreen:'KHÔNG GIAN NGHE NHẠC',moodNote:'Gợi ý theo màu sắc cảm xúc của bài hát',soon:'MV đang được cập nhật',closing:'Cảm ơn bạn đã lắng nghe.'},
+  en:{title:'PICK A STAR',lead:'Select a track from the constellation.',mood:'CHOOSE YOUR MOOD',dream:'Dreamy',energy:'Energy',love:'Romance',memory:'Nostalgia',surprise:'Surprise',wave:'LIVE AUDIO WAVE',real:'5 TRACKS · TÀI LÊ',fullscreen:'IMMERSIVE LISTENING',moodNote:'A soundtrack to your mood',soon:'Music videos are coming soon',closing:'Thanks for listening.'},
+  ja:{title:'星を選んで',lead:'星を選んで楽曲を再生できます。',mood:'気分で選ぶ',dream:'夢心地',energy:'元気',love:'ロマンチック',memory:'思い出',surprise:'おまかせ',wave:'ライブ音声ビジュアライザー',real:'5曲 · TÀI LÊ',fullscreen:'音楽の世界に浸る',moodNote:'気分に合わせて曲を探そう',soon:'MVは準備中です',closing:'ご視聴ありがとうございます。'}
  };
  const lang=()=>localized[document.documentElement.lang]||localized.vi;
  const safeIndex=()=>Math.max(0,Math.min(tracks.length-1,Number(window.PORTALVERSE_CURRENT_TRACK?.()??0)));
@@ -21,21 +21,39 @@
   const vinyl=document.createElement('div');vinyl.className='v14-vinyl-record';vinyl.innerHTML='<span class="v14-record-center">✳</span>';
   stage.append(vinyl,art);
   const canvas=document.createElement('canvas');canvas.id='v14-wave';canvas.width=600;canvas.height=92;canvas.setAttribute('aria-label','Audio visualizer');canvas.setAttribute('role','img');panel.append(canvas);
-  const meta=document.createElement('div');meta.className='v14-art-note';meta.innerHTML='<span>✳ PORTALVERSE RECORDS</span><span>05 / ORIGINAL SONGS</span>';panel.append(meta);
+  // No redundant credits or count below the audio visualizer.
  }
  // Constellation map with five accessible song selections.
  const layout=$('.music-layout');
  const sky=document.createElement('section');sky.className='v14-starfield-section';sky.setAttribute('aria-label','Interactive music constellation');
- sky.innerHTML=`<div class="v14-starhead"><span class="v14-overline">✦ PORTALVERSE / 05 ORIGINALS</span><h2 data-v14="title"></h2><p data-v14="lead"></p></div><div class="v14-constellation" id="v14-constellation"><div class="v14-orbit-ring ring-a"></div><div class="v14-orbit-ring ring-b"></div><span class="v14-skyline">TÀI LÊ<br><small>✳ MUSIC UNIVERSE</small></span></div><div class="v14-moods"><div class="v14-moods-head"><h3 data-v14="mood"></h3><p data-v14="moodNote"></p></div><div class="v14-mood-buttons" id="v14-mood-buttons"></div></div>`;
+ sky.innerHTML=`<div class="v14-starhead"><h2 data-v14="title"></h2><p data-v14="lead"></p></div><div class="v14-constellation" id="v14-constellation"><div class="v14-orbit-ring ring-a"></div><div class="v14-orbit-ring ring-b"></div><span class="v14-skyline">TÀI LÊ<br><small>✳ MUSIC UNIVERSE</small></span></div><div class="v14-moods"><div class="v14-moods-head"><h3 data-v14="mood"></h3><p data-v14="moodNote"></p></div><div class="v14-mood-buttons" id="v14-mood-buttons"></div></div>`;
  layout?.insertAdjacentElement('afterend',sky);
  const starRoot=$('#v14-constellation');
  tracks.forEach((track,i)=>{
   const b=document.createElement('button');b.type='button';b.className=`v14-song-star star-${i+1}`;
   b.style.setProperty('--starglow',colorThemes[i%5][0]); b.setAttribute('aria-label',track.title.vi||track.title);
   const img=document.createElement('img');img.src=track.cover;img.alt='';img.loading='lazy';
-  const text=document.createElement('span');text.textContent=typeof track.title==='string'?track.title:track.title.vi;
+  const text=document.createElement('span');text.textContent=typeof track.title==='string'?track.title:track.title.vi;text.lang='vi';
   const sparkle=document.createElement('i');sparkle.textContent='✦';b.append(img,text,sparkle);
-  b.addEventListener('click',()=>{window.PORTALVERSE_SELECT_TRACK?.(i,true);$('.player-surface')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});});starRoot?.append(b);
+  b.addEventListener('click',()=>{
+    if(b.classList.contains('v18-bursting'))return;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduced){
+      b.classList.add('v18-bursting');
+      const layer=document.createElement('span');layer.className='v18-star-particles';layer.setAttribute('aria-hidden','true');
+      for(let n=0;n<14;n++){
+        const p=document.createElement('i');const angle=(n/14)*Math.PI*2;
+        p.style.setProperty('--dx',(Math.cos(angle)*(32+(n%4)*12)).toFixed(1)+'px');
+        p.style.setProperty('--dy',(Math.sin(angle)*(26+(n%3)*15)).toFixed(1)+'px');
+        p.style.setProperty('--delay',((n%4)*13)+'ms');
+        layer.appendChild(p);
+      }
+      b.appendChild(layer);
+      setTimeout(()=>{layer.remove();b.classList.remove('v18-bursting')},610);
+    }
+    window.PORTALVERSE_SELECT_TRACK?.(i,true);
+    setTimeout(()=>$('.player-surface')?.scrollIntoView({behavior:reduced?'instant':'smooth',block:'center'}),reduced?0:520);
+  });starRoot?.append(b);
  });
  const moods=[['dream',0,'☁'],['energy',1,'⚡'],['love',2,'♡'],['memory',4,'✧'],['surprise',-1,'✳']];
  moods.forEach(([key,index,ico])=>{const b=document.createElement('button');b.type='button';b.className='v14-mood-button';b.dataset.key=key;b.append(document.createElement('span'));b.firstElementChild.className='v14-mood-glyph';b.firstElementChild.textContent=ico;const label=document.createElement('span');label.className='v14-mood-label';label.textContent=lang()[key];b.append(label);
@@ -73,7 +91,11 @@
  // Mouse-responsive project cards, disabled for touch/low-motion users.
  const hoverOK=window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches;
  if(hoverOK){document.addEventListener('pointermove',e=>{const card=e.target.closest('.product-card');if(!card)return;const rect=card.getBoundingClientRect();const x=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width)),y=Math.max(0,Math.min(1,(e.clientY-rect.top)/rect.height));card.style.setProperty('--tilt-x',((.5-y)*6).toFixed(2)+'deg');card.style.setProperty('--tilt-y',((x-.5)*7).toFixed(2)+'deg');card.style.setProperty('--cursor-x',(x*100)+'%');card.style.setProperty('--cursor-y',(y*100)+'%')});
-  document.addEventListener('pointerout',e=>{const card=e.target.closest('.product-card');if(card&&!card.contains(e.relatedTarget)){card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg')}});
+  const resetTilt=card=>{if(!card)return;card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg');};
+  document.addEventListener('pointerout',e=>{const card=e.target.closest('.product-card');if(card&&!card.contains(e.relatedTarget))resetTilt(card)});
+  document.addEventListener('pointerup',e=>resetTilt(e.target.closest('.product-card')));
+  document.addEventListener('pointercancel',e=>resetTilt(e.target.closest('.product-card')));
+  window.addEventListener('blur',()=>document.querySelectorAll('.product-card').forEach(resetTilt));
  }
  // Reveal cards on scroll without blocking accessibility or rendering offscreen contents.
  if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion:reduce)').matches){

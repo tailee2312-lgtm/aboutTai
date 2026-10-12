@@ -25,7 +25,7 @@
   let toastTimer, reactionTimer, idleTimer;
 
   // Inject real author data into layout, keeping the design useful with empty media links.
-  if (data.artist) document.title = `${data.artist} ✦ PORTALVERSE`;
+  if (data.artist) document.title = `${data.artist} · MUSIC & DIGITAL PROJECTS`;
   if (data.intro) $('#hero-intro').textContent = data.intro;
   if (data.about) $('#about-content').textContent = data.about;
   $('#year').textContent = new Date().getFullYear();
@@ -178,64 +178,29 @@
     element.scrollIntoView({behavior:'instant',block:'start'});
     updateNav();
   }
-  const warpCanvas=$('#wormhole-canvas');
-  const warpCtx=warpCanvas.getContext('2d',{alpha:true});
-  let warpRAF=0,warpParticles=[];
-  function stopWarp(){if(warpRAF)cancelAnimationFrame(warpRAF);warpRAF=0;warpCtx.clearRect(0,0,warpCanvas.width,warpCanvas.height);}
-  function startWarp(hex){
-    if(prefersReducedMotion)return;
-    stopWarp();
-    const dpr=Math.min(1.5,window.devicePixelRatio||1),w=window.innerWidth,h=window.innerHeight;
-    warpCanvas.width=Math.round(w*dpr);warpCanvas.height=Math.round(h*dpr);
-    warpCtx.setTransform(dpr,0,0,dpr,0,0);
-    const cx=w/2,cy=h/2,count=w<550?85:145;
-    warpParticles=Array.from({length:count},()=>({angle:Math.random()*Math.PI*2,z:Math.random(),size:Math.random()*2.8+1,speed:Math.random()*.9+.6}));
-    const started=performance.now();
-    function render(now){
-      const elapsed=Math.min(1,(now-started)/1650),intensity=Math.min(1,elapsed*4);
-      warpCtx.clearRect(0,0,w,h);
-      const glow=warpCtx.createRadialGradient(cx,cy,0,cx,cy,Math.max(w,h)*.75);
-      glow.addColorStop(0,'#030418');glow.addColorStop(.28,'#121056');glow.addColorStop(.6,'#32116f');glow.addColorStop(1,'rgba(3,2,16,0)');
-      warpCtx.globalAlpha=.85;warpCtx.fillStyle=glow;warpCtx.fillRect(0,0,w,h);
-      warpCtx.save();warpCtx.translate(cx,cy);
-      warpParticles.forEach((p,i)=>{
-        const phase=(p.z+elapsed*(2.2+p.speed))%1;
-        const near=phase**2.25;
-        const theta=p.angle+elapsed*(2.8+near*2.1);
-        const rad=near*Math.max(w,h)*1.35;
-        const x=Math.cos(theta)*rad,y=Math.sin(theta)*rad*.74;
-        const prev=Math.max(0,rad-(12+near*105)*intensity);
-        warpCtx.beginPath();warpCtx.moveTo(Math.cos(theta-.014)*prev,Math.sin(theta-.014)*prev*.74);warpCtx.lineTo(x,y);
-        warpCtx.lineWidth=Math.max(1,p.size*(1+near*1.7));
-        warpCtx.strokeStyle=[hex,'#4cefff','#f866f7','#fff8da'][i%4];warpCtx.globalAlpha=Math.min(.96,.15+phase*.9);warpCtx.stroke();
-      });
-      for(let n=0;n<12;n++){
-        const depth=((n/12+elapsed*1.32)%1),radius=(depth**2.7)*Math.max(w,h)*1.1+12;
-        warpCtx.beginPath();warpCtx.ellipse(0,0,radius,radius*.69,elapsed*2+n*.17,0,Math.PI*2);
-        warpCtx.strokeStyle=n%2===0?hex:'#51eaff';warpCtx.lineWidth=(.7+depth*5)*intensity;
-        warpCtx.globalAlpha=(.09+depth*.42)*intensity;warpCtx.stroke();
-      }
-      warpCtx.restore();warpCtx.globalAlpha=1;
-      if(elapsed<1)warpRAF=requestAnimationFrame(render);
-      else warpRAF=0;
-    }
-    warpRAF=requestAnimationFrame(render);
-  }
+  // Lightweight GPU-composited transition: no particles, canvas or per-frame JS work.
   function travelTo(target,realm=target){
-    if(traveling)return;
-    if(target.startsWith('/'))return;
-    if(!$('#'+target))return;
-    if(prefersReducedMotion){navigateTo(target,realm);return;}
+    if(traveling||target.startsWith('/'))return;
+    const desired=target==='route-music'?'music':target==='route-products'?'products':target==='home'?'home':null;
+    if(desired && document.body.dataset.view===desired)return;
+    if(target!=='home'&&!$('#'+target))return;
+    if(!desired){navigateTo(target,realm);return;}
     traveling=true;
     const info=realmNames[realm]||realmNames[target]||realmNames.home;
     $('#rift-counter').textContent=`DIMENSION ${info[0]}`;
     $('#rift-name').textContent=t(info[1]);
     rift.style.setProperty('--travel-color',info[2]);
-    rift.classList.remove('is-exiting');void rift.offsetWidth;
+    // Four random light-weight scene transitions. Only true page changes reach travelTo.
+    const variants=['fold','glass','sweep','pulse'];
+    const variant=variants[Math.floor(Math.random()*variants.length)];
+    rift.dataset.motion=variant;
+    rift.classList.remove('is-exiting');
     rift.classList.add('is-active');
-    startWarp(info[2]);
-    travelTimer1=setTimeout(()=>{navigateTo(target,realm);rift.classList.add('is-exiting');},1040);
-    travelTimer2=setTimeout(()=>{rift.classList.remove('is-active','is-exiting');stopWarp();traveling=false;},1690);
+    const arrive=()=>{if(desired)window.PORTALVERSE_ROUTE?.(desired);else navigateTo(target,realm)};
+    if(prefersReducedMotion){arrive();rift.classList.remove('is-active');traveling=false;return}
+    clearTimeout(travelTimer1);clearTimeout(travelTimer2);
+    travelTimer1=setTimeout(()=>{arrive();rift.classList.add('is-exiting')},260);
+    travelTimer2=setTimeout(()=>{rift.classList.remove('is-active','is-exiting');traveling=false},620);
   }
   function mysteryTravel(){
     const destinations=[['music','music'],['covers','piano'],['covers','guitar'],['about','about'],['playground','portal-map']];
@@ -423,7 +388,7 @@
     if(!dictionaries[next])return;
     language=next;document.documentElement.lang=next;
     document.documentElement.dataset.language=next;
-    document.title='TÀI LÊ ✦ PORTALVERSE';
+    document.title='TÀI LÊ · MUSIC & DIGITAL PROJECTS';
     $('#language-code').textContent=next==='ja'?'JP':next.toUpperCase();
     languageButton.setAttribute('aria-label',t('selectLanguage'));
     $$('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(dictionaries[next][key])el.textContent=t(key)});

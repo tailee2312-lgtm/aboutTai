@@ -6,9 +6,9 @@
  */
 window.PORTALVERSE_CONTENT = {
   artist: 'TÀI LÊ',
-  headline: 'A small boy in a big universe.',
-  intro: 'Chào mừng đến với vũ trụ nhỏ của mình — nơi giai điệu mở ra những thế giới mới và các ý tưởng biến thành game, ứng dụng đầy màu sắc.',
-  about: 'Mình thích viết nhạc, chơi piano, guitar và biến những ý tưởng tưởng chừng vô lý thành điều gì đó có thật. Portalverse là góc nhỏ để mình gom lại những câu chuyện, bản nhạc và những thứ mình đang sáng tạo.',
+  headline: 'Sound & Code.',
+  intro: 'Âm nhạc và những sản phẩm số do Tài Lê thực hiện.',
+  about: 'Tài Lê sáng tác âm nhạc, chơi piano và guitar, đồng thời phát triển web game và ứng dụng. Portalverse tập hợp những dự án và bản thu đã thực hiện.',
   email: '', // Ví dụ: hello@example.com
   socials: {
     youtube: '',
@@ -19,8 +19,8 @@ window.PORTALVERSE_CONTENT = {
   },
   localized: {
     en: {
-      intro: 'Welcome to my little universe, where melodies open new worlds and ideas become colorful games and apps.',
-      about: 'I love writing music, playing piano and guitar, and turning unlikely ideas into something real. Portalverse is the little place where I bring my stories, music and creative experiments together.',
+      intro: 'Original music and digital creations by Tài Lê.',
+      about: 'Tài Lê creates music, performs piano and guitar, and develops web games and applications. Portalverse brings together selected music and digital projects.',
       works: {
         'mv-01': {title:'A portal yet to open',subtitle:'A world told through music and images.'},
         'piano-01': {title:'Piano — first melodies',subtitle:'A little journey across the keys.'},
@@ -28,8 +28,8 @@ window.PORTALVERSE_CONTENT = {
       }
     },
     ja: {
-      intro: '僕の小さな宇宙へようこそ。音楽が新しい世界を開き、アイデアがゲームやアプリになる場所です。',
-      about: '作曲、ピアノ、ギターが好きです。ちょっと不思議なアイデアを形にするのも大好き。Portalverseは、僕の音楽と物語、創作を集めた小さな場所です。',
+      intro: 'Tài Lêの音楽とデジタル作品を紹介します。',
+      about: 'Tài Lêは音楽制作、ピアノ・ギター演奏、Webゲームやアプリの開発を手がけています。Portalverseでは楽曲と制作プロジェクトを公開しています。',
       works: {
         'mv-01': {title:'まだ開かないポータル',subtitle:'音楽と映像で紡ぐ世界。'},
         'piano-01': {title:'ピアノ — はじまりのメロディー',subtitle:'鍵盤から広がる音の旅。'},

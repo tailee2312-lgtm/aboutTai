@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#08071d" name="theme-color"/>
+<meta content="TÀI LÊ · Portalverse — original music, karaoke, web games and creative apps in a colorful little universe." name="description"/>
+<meta content="TÀI LÊ — PORTALVERSE" property="og:title"/>
+<meta content="Music · Stories · Different realities. Enter my little universe." property="og:description"/>
+<meta content="website" property="og:type"/>
+<title>TÀI LÊ | PORTALVERSE</title>
+<link href="assets/mascot-happy.webp" rel="icon" type="image/webp"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;family=Kalam:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="v13.css" rel="stylesheet"/>
+<link href="v14.css" rel="stylesheet"/>
+<script defer="" src="config.js"></script>
+<script defer="" src="i18n.js"></script>
+<script defer="" src="app.js"></script>
+<script defer="" src="v13-content.js"></script>
+<script defer="" src="v13.js"></script>
+<script defer="" src="v14.js"></script>
+<link rel="stylesheet" href="portal-glyphs.css"/>
+</head>
+<body>
+<a class="skip-link" data-i18n="skipLink" href="#main">Chuyển đến nội dung</a>
+<div aria-hidden="true" class="reading-progress" id="reading-progress"></div>
+<div aria-hidden="true" class="cosmos"><div class="stars" id="stars"></div><div class="nebula nebula-a"></div><div class="nebula nebula-b"></div><div class="nebula nebula-c"></div></div>
+<div aria-hidden="true" class="pointer-aura" id="pointer-aura"></div>
+<!-- Portal travel is decorative; navigation remains semantic and keyboard-accessible. -->
+<div aria-hidden="true" class="rift-transition" id="rift-transition">
+<div class="rift-depth rift-depth-back"></div>
+<div class="rift-depth rift-depth-mid"></div>
+<div class="rift-depth rift-depth-front"></div>
+<div class="rift-blackhole"><span>✦</span></div><canvas aria-hidden="true" id="wormhole-canvas"></canvas><div aria-hidden="true" class="rift-shockwave"></div><div aria-hidden="true" class="rift-whiteout"></div>
+<div class="rift-caption"><small id="rift-counter">DIMENSION 01 / 03</small><strong id="rift-name">MUSIC GALAXY</strong><span>TRAVELING BETWEEN WORLDS <i>✳</i></span></div>
+</div>
+<div aria-hidden="true" class="realm-status"><span class="realm-status-orb"></span><span id="realm-status-text">HOME UNIVERSE</span></div>
+<header class="site-header" id="home">
+<a aria-label="Tài Lê, về đầu trang" class="wordmark" href="#home"><span>TÀI LÊ</span><span class="wordmark-star">✳</span><span class="wordmark-swipe"></span></a>
+<p class="header-tag" data-i18n="headerTag">MUSIC • STORIES • ANOTHER REALITIES</p>
+<nav aria-label="Điều hướng chính" class="desktop-nav">
+<a class="nav-link active" data-i18n="navHome" href="#home">Home</a><a class="nav-link" data-i18n="navMusic" href="#music">MV</a><a class="nav-link" data-i18n="navCovers" href="#covers">Covers</a><a class="nav-link" data-i18n="navAbout" href="#about">About</a><a class="nav-link" data-i18n="navContact" href="#contact">Contact</a>
+<button aria-label="Tạo một hiệu ứng bất ngờ" class="nav-portal" data-i18n-aria="surpriseAria" id="surprise-button" title="Thử một chút phép màu" type="button">✦</button>
+</nav>
+<div class="language-switch" id="language-switch"><button aria-controls="language-menu" aria-expanded="false" aria-haspopup="true" aria-label="Chọn ngôn ngữ" class="language-button" id="language-button" type="button"><span aria-hidden="true">◎</span><span id="language-code">VI</span><span aria-hidden="true" class="lang-chevron">⌄</span></button><div aria-label="Languages" class="language-menu" hidden="" id="language-menu" role="group"><button data-language="vi" lang="vi" type="button">Tiếng Việt <span>VI</span></button><button data-language="en" lang="en" type="button">English <span>EN</span></button><button data-language="ja" lang="ja" type="button">日本語 <span>JP</span></button></div></div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Mở menu" class="mobile-menu-trigger" data-i18n-aria="menuAria" id="menu-button" type="button"><span></span><span></span><span></span></button>
+</header>
+<nav aria-label="Menu điện thoại" class="mobile-dropdown" hidden="" id="mobile-menu"><a data-i18n="navHome" href="#home">Home</a><a data-i18n="navMusic" href="#music">Music &amp; MV</a><a data-i18n="navCovers" href="#covers">Piano &amp; Guitar</a><a data-i18n="navAbout" href="#about">About me</a><a data-i18n="navContact" href="#contact">Contact</a></nav>
+<main id="main">
+<section aria-labelledby="hero-title" class="hero section-shell">
+<div aria-hidden="true" class="hero-floating hero-tape tape-left"><span>♫</span><i>PLAY</i></div>
+<div aria-hidden="true" class="hero-floating hero-planet"><span>✧</span></div>
+<div class="hero-copy">
+<div class="tiny-label" data-i18n-html="welcomeHtml"><span class="pulse-dot"></span> WELCOME TO MY LITTLE UNIVERSE <span>✦</span></div>
+<h1 id="hero-title"><span class="enter">ENTER MY</span><span class="portalverse">PORTAL<span class="verse-word">VERSE</span><span class="paint-underline"></span></span></h1>
+<div class="hero-subtitle" data-i18n-html="heroSubtitleHtml"><span>✧</span> MUSIC • STORIES • DIFFERENT REALITIES <span>✧</span></div>
+<p id="hero-intro">Chào mừng đến với vũ trụ nhỏ của mình — nơi những cảm xúc trở thành giai điệu, những câu chuyện trở thành hình ảnh và mỗi bài nhạc là một thế giới khác.</p>
+<div class="hero-actions"><a class="btn btn-glow" data-i18n-html="exploreHtml" href="#portal-map">KHÁM PHÁ VŨ TRỤ <span class="btn-arrow">↗</span></a><button class="btn btn-outline" data-i18n-html="watchMVHtml" data-open-work="mv-01" type="button"><span class="play-icon">▶</span> XEM MV</button></div>
+<div class="hero-meta"><div class="meta-avatars"><img alt="" src="assets/mascot-happy.webp"/><img alt="" src="assets/mascot-sparkles.webp"/><img alt="" src="assets/mascot-love.webp"/></div><span>A SMALL BOY<br/>IN A BIG UNIVERSE ♡</span></div>
+</div>
+<div aria-label="Mascot đội mũ đỏ trước cổng không gian" class="hero-visual" id="hero-visual">
+<div class="world-label floating-label label-01" data-i18n-html="bubbleWelcomeHtml">WELCOME<br/>TO MY WORLD! <span>♡</span></div>
+<div class="world-label floating-label label-02" data-i18n-html="bubbleRealitiesHtml">SAME BOY<br/>DIFFERENT REALITIES <span>✳</span></div>
+<div aria-hidden="true" class="portal-scene"><div class="portal-glow"></div><div class="portal-ring portal-ring-1"></div><div class="portal-ring portal-ring-2"></div><div class="portal-ring portal-ring-3"></div><div class="portal-core"></div><div class="portal-line portal-line-1"></div><div class="portal-line portal-line-2"></div></div>
+<span aria-hidden="true" class="hero-star hero-star-1">✦</span><span aria-hidden="true" class="hero-star hero-star-2">✳</span><span aria-hidden="true" class="hero-star hero-star-3">✧</span><button aria-label="Tìm thấy ngôi sao 1 trên 5" class="collectible-star star-position-1" data-star-id="1" title="✦" type="button">✦</button><span aria-hidden="true" class="hero-star hero-star-4">★</span>
+<div class="mascot-wrap" id="mascot-wrap"><button aria-label="Chạm để đổi biểu cảm của mascot" class="mascot-button" data-i18n-aria="mascotAria" id="mascot" type="button"><img alt="Cậu bé chibi đội mũ đỏ, áo hoodie xanh, đang cười" id="mascot-image" src="assets/mascot-surprise.webp"/>
+<svg aria-hidden="true" class="mascot-eye-tracker" id="mascot-eyes" preserveaspectratio="xMidYMid meet" viewbox="0 0 460 500">
+<defs><lineargradient id="iris-fill" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#201b1c"></stop><stop offset=".58" stop-color="#352524"></stop><stop offset="1" stop-color="#674134"></stop></lineargradient></defs>
+<ellipse cx="189" cy="228" fill="#f9f9fb" rx="22" ry="23.5"></ellipse><ellipse cx="272" cy="228" fill="#f9f9fb" rx="22" ry="23.5"></ellipse>
+<g class="tracking-pupils" id="tracking-pupils">
+<ellipse cx="189" cy="228" fill="url(#iris-fill)" rx="16.7" ry="20" stroke="#16151b" stroke-width="3.4"></ellipse>
+<ellipse cx="272" cy="228" fill="url(#iris-fill)" rx="16.7" ry="20" stroke="#16151b" stroke-width="3.4"></ellipse>
+<ellipse cx="185" cy="221" fill="#0b0b15" rx="6.9" ry="11"></ellipse><ellipse cx="268" cy="221" fill="#0b0b15" rx="6.9" ry="11"></ellipse>
+<circle cx="183" cy="218" fill="#fff" r="4.5"></circle><circle cx="266" cy="218" fill="#fff" r="4.5"></circle>
+</g>
+</svg></button><div class="mascot-shadow"></div></div>
+<div aria-hidden="true" class="reaction-cards"><div class="reaction-card card-one"><img alt="" src="assets/mascot-surprise.webp"/></div><div class="reaction-card card-two"><img alt="" src="assets/mascot-star-eyes.webp"/></div><div class="reaction-card card-three"><img alt="" src="assets/mascot-sleepy.webp"/></div></div>
+<div class="floating-spark spark-a">✦</div><div class="floating-spark spark-b">✳</div><div class="floating-spark spark-c">✴</div>
+</div>
+<a class="scroll-cue" data-i18n-html="scrollHtml" href="#portal-map">SCROLL TO EXPLORE <span>↓</span></a>
+<div class="hero-side-note" data-i18n-html="heroSideHtml">MUSIC CONNECTS<br/>DIFFERENT WORLDS <span>♡</span></div>
+</section>
+<nav aria-label="Bản đồ ba thế giới âm nhạc" class="portal-map section-shell" id="portal-map">
+<div class="portal-map-heading"><span data-i18n="mapOverline">✦ INTERDIMENSIONAL MAP</span><strong data-i18n-html="choosePortalHtml">CHOOSE A PORTAL <span>↘</span></strong><small data-i18n="touchPortal">CHẠM VÀO MỘT THẾ GIỚI ĐỂ DỊCH CHUYỂN</small></div>
+<button aria-label="Tìm thấy ngôi sao 2 trên 5" class="collectible-star star-position-2" data-star-id="2" title="✦" type="button">✦</button><div class="portal-gates">
+<button aria-label="Đi xuyên cổng đến MV" class="portal-gate gate-mv" data-i18n-aria="enterMvAria" data-portal-to="music" data-portal-world="mv" type="button">
+<span class="gate-portal"><span class="gate-inner">▶</span></span><span class="gate-copy"><small>01 / CINEMA GALAXY</small><strong>MV</strong><em data-i18n="gateMvDesc">Những câu chuyện thành hình</em></span><span class="gate-arrow">↗</span>
+</button>
+<button aria-label="Đi xuyên cổng đến Piano" class="portal-gate gate-piano" data-i18n-aria="enterPianoAria" data-portal-to="covers" data-portal-world="piano" type="button">
+<span class="gate-portal"><span class="gate-inner">♫</span></span><span class="gate-copy"><small>02 / BLUE FREQUENCY</small><strong>PIANO</strong><em data-i18n="gatePianoDesc">Lạc vào thế giới phím đàn</em></span><span class="gate-arrow">↗</span>
+</button>
+<button aria-label="Đi xuyên cổng đến Guitar" class="portal-gate gate-guitar" data-i18n-aria="enterGuitarAria" data-portal-to="covers" data-portal-world="guitar" type="button">
+<span class="gate-portal"><span class="gate-inner">✳</span></span><span class="gate-copy"><small>03 / SOLAR STRINGS</small><strong>GUITAR</strong><em data-i18n="gateGuitarDesc">Nơi giai điệu rực cháy</em></span><span class="gate-arrow">↗</span>
+</button>
+</div>
+</nav>
+<div aria-hidden="true" class="marquee marquee-top"><div class="marquee-track">♪ THIS IS MY LITTLE UNIVERSE ✳ MUSIC • FEELINGS • STORIES ✦ EVERY SONG IS A NEW WORLD ✳  ♪ THIS IS MY LITTLE UNIVERSE ✳ MUSIC • FEELINGS • STORIES ✦ EVERY SONG IS A NEW WORLD ✳ </div></div>
+<section aria-labelledby="music-title" class="music-section section-shell" id="music">
+<div class="section-heading"><div><div class="section-overline" data-i18n="portalOne">PORTAL NO. 01 <span>↗</span></div><h2 data-i18n-html="musicTitleHtml" id="music-title">MUSIC <span class="highlight-pink">VIDEOS<span class="ink-star">✳</span></span></h2><p data-i18n="mvLead">Chuyện mình kể qua giai điệu và từng khung hình.</p></div><span class="section-stamp stamp-pink" data-i18n-html="mvStampHtml">MY<br/>WORLD<br/>OF MV ↗</span></div>
+<button aria-label="Tìm thấy ngôi sao 3 trên 5" class="collectible-star star-position-3" data-star-id="3" title="✦" type="button">✦</button><div class="mv-layout"><button aria-label="Mở MV nổi bật" class="mv-feature tilt-card" data-open-work="mv-01" type="button"><div class="mv-image" id="mv-image"><span class="mv-tag" data-i18n="mvTag">✦ FEATURED MV</span><div class="mv-play"><span>▶</span></div><span class="mv-corner">01 / THE MUSIC PORTAL</span></div><div class="mv-bottom"><div><span class="mv-eyebrow" data-i18n="mvEyebrow">VISUAL STORYTELLING</span><h3 id="mv-title">MV của mình sẽ ở đây</h3><p id="mv-subtitle">Một thế giới được kể bằng âm nhạc và hình ảnh.</p></div><div class="round-arrow">↗</div></div></button><aside class="mv-side"><div class="side-bubble bubble-blue" data-i18n-html="mvBubbleHtml">NOT JUST<br/>A SONG.<br/><em>A WHOLE WORLD!</em><span>↘</span></div><div aria-hidden="true" class="orbit-record"><div class="record-label">TÀI LÊ<br/><small>✳</small></div></div><p data-i18n-html="pressPlayHtml">PRESS PLAY<br/><span>AND FEEL SOMETHING</span></p></aside></div>
+</section>
+<section aria-labelledby="covers-title" class="covers-section section-shell" id="covers"><div class="section-heading covers-heading"><div><div class="section-overline" data-i18n="portalTwoThree">PORTALS NO. 02 &amp; 03 <span>↗</span></div><h2 data-i18n-html="coversTitleHtml" id="covers-title">THE <span class="highlight-cyan">COVER</span> DIMENSIONS</h2><p data-i18n="coversLead">Cùng một người, hai thế giới âm nhạc rất khác nhau.</p></div><div aria-label="Chọn chiều không gian" class="covers-chips"><button class="dimension-chip active" data-dimension="both" data-i18n="allWorlds" type="button">ALL WORLDS</button><button class="dimension-chip" data-dimension="piano" type="button">PIANO</button><button class="dimension-chip" data-dimension="guitar" type="button">GUITAR</button></div></div>
+<button aria-label="Tìm thấy ngôi sao 4 trên 5" class="collectible-star star-position-4" data-star-id="4" title="✦" type="button">✦</button><div class="dimension-grid">
+<article class="dimension-card piano-world tilt-card" data-world="piano"><div class="dimension-sky"><span class="world-index">02 / BLUE FREQUENCY</span><div class="card-blob card-blob-blue"></div><div class="artwork" style="background-image: url('assets/piano-scene.webp')"></div><span class="card-doodle" data-i18n-html="pianoDoodleHtml">LET MUSIC<br/>BREATHE ♡</span></div><div class="dimension-info"><div><span class="spray-title spray-cyan">PIANO <span>♫</span></span><p data-i18n="pianoCardLead">Những nốt nhạc bay giữa một bầu trời xanh.</p></div><button aria-label="Mở thế giới Piano" class="dimension-open" data-open-work="piano-01" type="button">↗</button></div></article>
+<article class="dimension-card guitar-world tilt-card" data-world="guitar"><div class="dimension-sky"><span class="world-index">03 / SUNSET STRINGS</span><div class="card-blob card-blob-orange"></div><div class="artwork" style="background-image: url('assets/guitar-scene.webp')"></div><span class="card-doodle" data-i18n-html="guitarDoodleHtml">SAME CHORDS<br/>NEW STORIES ✳</span></div><div class="dimension-info"><div><span class="spray-title spray-orange">GUITAR <span>✳</span></span><p data-i18n="guitarCardLead">Một chiếc guitar, một chuyến đi và thật nhiều cảm xúc.</p></div><button aria-label="Mở thế giới Guitar" class="dimension-open" data-open-work="guitar-01" type="button">↗</button></div></article>
+</div>
+</section>
+<div aria-hidden="true" class="marquee marquee-secondary"><div class="marquee-track">NO RULES IN MY UNIVERSE ✴ KEEP CREATING ✴ KEEP DREAMING ✴ KEEP PLAYING ✴   NO RULES IN MY UNIVERSE ✴ KEEP CREATING ✴ KEEP DREAMING ✴ KEEP PLAYING ✴  </div></div>
+<section aria-labelledby="playground-title" class="playground-section section-shell" id="playground">
+<div class="playground-heading"><span class="section-overline" data-i18n="playgroundOverline">✳ SECRET DIMENSION / INTERACTIVE</span><h2 id="playground-title"><span data-i18n="playgroundTitle">ĐỪNG CHỈ XEM. <em>HÃY CHƠI!</em></span></h2><p data-i18n="playgroundDesc">Chạm vào phím đàn, đi lạc một chút, và tìm những ngôi sao bí mật trong vũ trụ này.</p></div>
+<div class="playground-grid">
+<div class="piano-lab" id="mini-piano-card"><div class="toy-top"><span class="toy-label" data-i18n="miniPianoLabel">01 · POCKET PIANO</span><span class="toy-orbit">♫ ✧ ♪</span></div><h3 data-i18n="miniPianoTitle">Chơi một giai điệu!</h3><p data-i18n="miniPianoDesc">Chạm các phím hoặc dùng A–K trên bàn phím máy tính.</p><div aria-hidden="true" class="piano-visualizer" id="piano-visualizer"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div aria-label="Mini Piano" class="mini-piano" id="mini-piano" role="group"><button aria-label="Đô, phím A" class="piano-key" data-key="A" data-note="261.63" type="button"><kbd>A</kbd></button><button aria-label="Rê, phím S" class="piano-key" data-key="S" data-note="293.66" type="button"><kbd>S</kbd></button><button aria-label="Mi, phím D" class="piano-key" data-key="D" data-note="329.63" type="button"><kbd>D</kbd></button><button aria-label="Fa, phím F" class="piano-key" data-key="F" data-note="349.23" type="button"><kbd>F</kbd></button><button aria-label="Sol, phím G" class="piano-key" data-key="G" data-note="392" type="button"><kbd>G</kbd></button><button aria-label="La, phím H" class="piano-key" data-key="H" data-note="440" type="button"><kbd>H</kbd></button><button aria-label="Si, phím J" class="piano-key" data-key="J" data-note="493.88" type="button"><kbd>J</kbd></button><button aria-label="Đô cao, phím K" class="piano-key" data-key="K" data-note="523.25" type="button"><kbd>K</kbd></button></div><span aria-live="polite" class="toy-hint" data-i18n="pianoHint" id="piano-hint">♫ Chạm để đánh thức những vì sao</span></div>
+<div class="mystery-lab"><div class="toy-top"><span class="toy-label" data-i18n="mysteryLabel">02 · THE UNKNOWN</span><span class="toy-orbit">✦ ✶ ✧</span></div><div aria-hidden="true" class="mystery-object"><span class="mystery-ring one"></span><span class="mystery-ring two"></span><span class="mystery-core">?</span></div><h3 data-i18n="mysteryTitle">Cổng bí ẩn</h3><p data-i18n="mysteryDesc">Không ai biết cánh cổng sẽ đưa bạn đến đâu...</p><button class="mystery-button" id="mystery-portal-button" type="button"><span data-i18n="mysteryGo">THỬ VẬN MAY</span> ↗</button></div>
+</div>
+<div class="star-quest" id="star-quest"><div><span class="quest-eyebrow" data-i18n="questEyebrow">✶ THE STAR HUNT</span><h3 data-i18n="questTitle">Có 5 ngôi sao đang trốn đâu đó...</h3><p data-i18n="questDesc">Tìm chúng trong các thế giới để nhận một bất ngờ nhỏ.</p></div><div aria-live="polite" class="quest-counter"><span id="star-count">0</span> / 5 <span aria-hidden="true">✦</span></div></div>
+</section>
+<section aria-labelledby="extras-title" class="extras-section section-shell"><div class="section-heading extras-heading"><div><div class="section-overline" data-i18n="extraDimension">EXTRA DIMENSION <span>✦</span></div><h2 data-i18n-html="momentsTitleHtml" id="extras-title">LITTLE <span class="highlight-yellow">MOMENTS</span></h2><p data-i18n="memoryLead">Vài mảnh ký ức rơi ra từ những cánh cổng khác.</p></div><span class="extras-asterisk">✳</span></div><button aria-label="Tìm thấy ngôi sao 5 trên 5" class="collectible-star star-position-5" data-star-id="5" title="✦" type="button">✦</button><div class="memory-strip"><div class="memory-polaroid rotate-left"><img alt="Cậu bé nhìn ra thành phố" src="assets/mini-rooftop.webp"/><span>somewhere ✧</span></div><div class="memory-polaroid rotate-right"><img alt="Cậu bé thư giãn nghe nhạc" src="assets/mini-dream.webp"/><span>little dreams ♡</span></div><div class="memory-polaroid rotate-left"><img alt="Một không gian khác" src="assets/mini-portal.webp"/><span>another world ↗</span></div><div class="memory-polaroid rotate-right"><img alt="Một biểu cảm vui của mascot" src="assets/mini-portrait.webp"/><span>just being me!</span></div><div class="memory-polaroid rotate-left"><img alt="Bầu trời vũ trụ" src="assets/mini-sky.webp"/><span>sky's the limit ✳</span></div></div></section>
+<section aria-labelledby="about-title" class="about-section section-shell" id="about"><div class="about-card"><div aria-hidden="true" class="about-orb"><div class="about-ring"></div><img alt="" src="assets/mascot-love.webp"/></div><div class="about-copy"><span class="section-overline" data-i18n="aboutOverline">WHO'S BEHIND ALL THIS CHAOS?</span><h2 data-i18n-html="aboutTitleHtml" id="about-title">OH, HI.<br/>I'M <span>TÀI!</span> <span class="hi-emoji">✳</span></h2><p id="about-content"></p><div class="about-fun-tags"><span>♫ MUSIC MAKER</span><span>⌘ CREATIVE SOUL</span><span>✦ DAYDREAMER</span></div></div></div></section>
+<section aria-labelledby="contact-title" class="contact-section section-shell" id="contact"><div aria-hidden="true" class="contact-portal"></div><span class="contact-eyebrow" data-i18n="contactOverline">YOU MADE IT TO THE END ♡</span><h2 data-i18n-html="contactTitleHtml" id="contact-title">LET'S CONNECT<br/><span>ACROSS UNIVERSES!</span></h2><p data-i18n="contactLead">Nếu bạn cũng yêu âm nhạc, có một ý tưởng thú vị, hay đơn giản muốn nói xin chào — tìm mình ở đây nhé.</p><div class="social-links" id="social-links"></div><p class="goodbye" data-i18n="goodbye">Thanks for being here. See you in another world. ✦</p><img alt="Mascot đang mỉm cười" class="footer-mascot" src="assets/mascot-shy.webp"/></section>
+<section class="route-page music-route" id="route-music" aria-label="My Musics" hidden>
+  <div class="route-backdrop music-backdrop"></div>
+  <div class="route-shell">
+    <div class="route-eyebrow"><span>✦ DIMENSION 01 / THE SOUND UNIVERSE</span><span class="route-signal">♫ &nbsp; 𝄞 &nbsp; ✧</span></div>
+    <div class="route-hero"><div><a class="back-link" href="#/home" data-v13="backUniverse">← VỀ VŨ TRỤ</a><h1 class="route-title music-heading"><span>MY</span> <em>MUSICS</em><b>♫</b></h1><p class="route-lead" data-v13="musicLead">Bật một giai điệu. Lạc vào một thế giới mới.</p></div><div aria-hidden="true" class="route-hero-orbit"><div class="orbit-cd"><div class="orbit-cd-label">TÀI LÊ<br><span>PORTALVERSE</span></div></div><span class="orbit-floating orbit-f1">✦</span><span class="orbit-floating orbit-f2">♪</span></div></div>
+    <div class="music-layout">
+      <section class="player-surface" aria-label="Music player">
+        <div class="player-art-panel"><span class="player-topline"><i class="live-dot"></i> <span data-v13="nowPlaying">NOW PLAYING</span></span><img id="player-art" src="assets/mv-scene.webp" alt="Music cover"/><div class="player-art-shine"></div><span class="player-sample-tag" id="player-sample-tag">DEMO</span></div>
+        <div class="player-right">
+          <div class="now-playing-title"><span class="eyebrow-cyan">TÀI LÊ / MUSIC SPACE</span><h2 id="player-title">Portalverse Prelude</h2><p id="player-subtitle">Tài Lê · Demo</p></div>
+          <div class="karaoke-panel" id="karaoke-panel"><div class="karaoke-header"><span data-v13="karaokeTitle">✧ KARAOKE LYRICS</span><span id="lyric-indicator">♪</span></div><div id="lyrics-viewport" class="lyrics-viewport" tabindex="0" aria-label="Lyrics synchronized with playback"><div class="lyric-empty" data-v13="lyricsLoading">Giai điệu này chưa có lời.</div></div></div>
+          <div class="player-bottom"><div class="seek-line"><span id="current-time">00:00</span><input type="range" min="0" max="1000" step="1" value="0" id="player-seek" aria-label="Seek track"/><span id="total-time">00:00</span></div>
+          <div class="transport"><button class="transport-icon" type="button" id="player-shuffle" aria-label="Shuffle" title="Shuffle">⤨</button><button class="transport-icon" type="button" id="player-prev" aria-label="Previous">⏮</button><button class="play-main" type="button" id="player-play" aria-label="Play">▶</button><button class="transport-icon" type="button" id="player-next" aria-label="Next">⏭</button><button class="transport-icon" type="button" id="player-loop" aria-label="Repeat" title="Repeat">↻</button></div>
+          <div class="volume-row"><span>♫</span><input type="range" id="player-volume" min="0" max="1" step="0.01" value="0.75" aria-label="Volume"/><button type="button" class="text-control" id="karaoke-focus" data-v13="karaokeFocus">TOÀN MÀN HÌNH ↗</button></div></div>
+        </div>
+      </section>
+      <section class="library-surface" aria-label="Music library"><div class="library-header"><div><span class="micro-label" data-v13="musicCollection">✦ THE COLLECTION</span><h2 data-v13="trackList">DANH SÁCH NHẠC</h2></div><span id="track-count" class="track-counter">03 TRACKS</span></div><div class="library-tools"><div class="library-filters" id="track-filters"></div><label class="search-pill"><span>⌕</span><input id="music-search" type="search" data-placeholder-v13="searchTracks" placeholder="Tìm bài hát" autocomplete="off"/></label></div><div class="track-list" id="track-list"></div><p class="library-footnote" data-v13="musicDisclaimer">Bản nhạc minh họa cho trải nghiệm nghe; các sáng tác chính thức sẽ được cập nhật sau.</p></section>
+    </div>
+    <div class="music-videos-title"><div><span class="micro-label" data-v13="filmRealm">02 / THE VISUAL STORIES</span><h2><span data-v13="mvHeading">MUSIC</span> <em>VIDEOS!</em></h2><p data-v13="mvLeadNew">Những câu chuyện được kể qua âm nhạc và khung hình.</p></div><span aria-hidden="true" class="music-video-spark">✶</span></div><div class="mv-gallery" id="mv-gallery"></div>
+  </div>
+</section>
+<section class="route-page product-route" id="route-products" aria-label="My Products" hidden>
+  <div class="route-backdrop product-backdrop"></div><div class="route-shell">
+    <div class="route-eyebrow"><span>✳ DIMENSION 02 / THE CREATIVE LAB</span><span class="route-signal">&lt; / &gt; &nbsp; ★</span></div>
+    <div class="route-hero product-route-hero"><div><a class="back-link" href="#/home" data-v13="backUniverse">← VỀ VŨ TRỤ</a><h1 class="route-title product-heading"><span>MY</span> <em>PRODUCTS</em><b>✳</b></h1><p class="route-lead" data-v13="productsLead">Những game và ứng dụng mình đã biến từ ý tưởng thành trải nghiệm.</p></div><div class="product-hero-object" aria-hidden="true"><div class="floating-screen a">{ }</div><div class="floating-screen b">▶</div><div class="floating-screen c">✳</div></div></div>
+    <div class="product-summary"><span class="micro-label" data-v13="productsOverline">✦ MY DIGITAL CREATIONS</span><h2 data-v13="projectLibrary">KHÁM PHÁ DỰ ÁN</h2><p data-v13="productInstruction">Chạm vào một sản phẩm để mở hồ sơ, xem hình ảnh và khám phá những tính năng bên trong.</p></div>
+    <div class="library-tools product-tools"><div class="library-filters" id="product-filters"></div><label class="search-pill"><span>⌕</span><input id="product-search" type="search" data-placeholder-v13="searchProducts" placeholder="Tìm dự án" autocomplete="off"/></label></div>
+    <div id="products-grid" class="products-grid"></div>
+    <div class="products-epilogue"><span>✦</span><p data-v13="projectsOutro">Đây chỉ là một phần nhỏ trong vũ trụ những ý tưởng của mình.</p><a href="#/music" class="cross-portal" data-v13="crossToMusic">GHÉ THẾ GIỚI ÂM NHẠC ↗</a></div>
+  </div>
+</section>
+<dialog class="project-modal" id="project-dialog" aria-labelledby="project-title"><div class="project-dialog-shell"><button type="button" class="project-close" id="project-close" aria-label="Close">✕</button><div class="project-dialog-cover"><img id="project-cover" src="assets/product-rpg.webp" alt=""/><div class="project-cover-gradient"></div><span id="project-type-label">WEB GAME</span></div><div class="project-dialog-info"><span class="micro-label" data-v13="projectDetails">✦ PROJECT INSIDE</span><h2 id="project-title"></h2><p id="project-description"></p><div class="project-tags" id="project-tags"></div><h3 data-v13="featuresTitle">ĐIỂM NỔI BẬT</h3><div class="project-features" id="project-features"></div><h3 data-v13="galleryTitle">GÓC NHÌN KHÁC</h3><div class="project-gallery" id="project-gallery"></div><p class="project-concept-note" data-v13="conceptNote">Hình minh họa định hướng; không phải ảnh chụp sản phẩm thực tế.</p><div id="project-link-slot"></div></div></div></dialog>
+<div class="persistent-mini-player" id="persistent-mini-player" hidden><img id="mini-cover" src="assets/mv-scene.webp" alt=""/><div class="mini-track-info"><strong id="mini-track-title">Portalverse Prelude</strong><span>TÀI LÊ</span></div><div class="mini-progress"><span id="mini-progress-fill"></span></div><button type="button" id="mini-player-open" class="mini-player-open" aria-label="Open music player">↗</button><button type="button" id="mini-player-toggle" class="mini-player-toggle" aria-label="Play or pause">▶</button></div>
+
+</main>
+<footer class="site-footer"><a class="footer-logo" data-i18n-aria="logoAria" href="#home">TÀI LÊ ✳</a><span>© <span id="year"></span> · MADE WITH MUSIC &amp; A LITTLE MAGIC</span><button class="back-to-top" data-i18n="backToTop" id="back-to-top" type="button">BACK TO TOP ↑</button></footer>
+<nav aria-label="Điều hướng nhanh trên điện thoại" class="bottom-nav"><a class="bottom-item active" href="#home"><span>⌂</span><small data-i18n="navHome">Home</small></a><a class="bottom-item" href="#music"><span>♫</span><small data-i18n="navMusic">MV</small></a><a class="bottom-item" href="#covers"><span>▶</span><small data-i18n="navCovers">Covers</small></a><a class="bottom-item" href="#about"><span>☆</span><small data-i18n="navAbout">About</small></a><a class="bottom-item" href="#contact"><span>✉</span><small data-i18n="navContact">Contact</small></a></nav>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<dialog aria-labelledby="modal-title" class="work-modal" id="work-modal"><div class="modal-shell"><button aria-label="Đóng" class="modal-close" data-i18n-aria="closeAria" id="modal-close" type="button">✕</button><div class="modal-media" id="modal-media"></div><div class="modal-content"><span class="modal-tag" id="modal-tag"></span><h2 id="modal-title"></h2><p id="modal-description"></p><div class="modal-note" id="modal-note"></div></div></div></dialog>
+<script src="portal-glyphs.js"></script>
+</body>
+</html>

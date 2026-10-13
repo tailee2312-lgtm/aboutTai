@@ -191,8 +191,7 @@
     $('#rift-name').textContent=t(info[1]);
     rift.style.setProperty('--travel-color',info[2]);
     // Four random light-weight scene transitions. Only true page changes reach travelTo.
-    const variants=['fold','glass','sweep','pulse'];
-    const variant=variants[Math.floor(Math.random()*variants.length)];
+    const variant='pulse'; // The only page transition: Center Pulse + Star Flash.
     rift.dataset.motion=variant;
     rift.classList.remove('is-exiting');
     rift.classList.add('is-active');

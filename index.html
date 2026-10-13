@@ -13,7 +13,7 @@
 <link href="assets/mascot-happy.webp" rel="icon" type="image/webp"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Lobster&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Lobster&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Anton&amp;family=Anybody:wght@400;500;600;700;800;900&amp;family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Anton&amp;family=Anybody:wght@400;500;600;700;800;900&amp;family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <link href="styles.css" rel="stylesheet"/>
 <link href="v13.css" rel="stylesheet"/>
 <link href="v14.css" rel="stylesheet"/>
@@ -21,14 +21,13 @@
 <link href="v17.css" rel="stylesheet"/>
 <link href="v18.css" rel="stylesheet"/>
 <link href="v19.css" rel="stylesheet"/>
-<link href="v19.css" rel="stylesheet"/>
+<link href="v20.css" rel="stylesheet"/>
 <script defer="" src="config.js"></script>
 <script defer="" src="i18n.js"></script>
 <script defer="" src="app.js"></script>
 <script defer="" src="v13-content.js"></script>
 <script defer="" src="v13.js"></script>
 <script defer="" src="v14.js"></script>
-<script defer="" src="v19.js"></script>
 <script defer="" src="v19.js"></script>
 <link rel="stylesheet" href="portal-glyphs.css"/>
 </head>
@@ -47,7 +46,7 @@
 </div>
 <div aria-hidden="true" class="realm-status"><span class="realm-status-orb"></span><span id="realm-status-text">HOME UNIVERSE</span></div>
 <header class="site-header" id="home">
-<a aria-label="Tài Lê, về đầu trang" class="wordmark" href="#home"><span>TÀI LÊ</span><span class="wordmark-star">✳</span><span class="wordmark-swipe"></span></a>
+<a aria-label="Tài Lê, về đầu trang" class="wordmark" href="#home"><span>Tài Lê</span><span class="wordmark-star">✳</span><span class="wordmark-swipe"></span></a>
 <p class="header-tag" data-i18n="headerTag">MUSIC • STORIES • ANOTHER REALITIES</p>
 <nav aria-label="Điều hướng chính" class="desktop-nav">
 <a class="nav-link active" data-i18n="navHome" href="#home">Home</a><a class="nav-link" data-i18n="navMusic" href="#music">MV</a><a class="nav-link" data-i18n="navCovers" href="#covers">Covers</a><a class="nav-link" data-i18n="navAbout" href="#about">About</a><a class="nav-link" data-i18n="navContact" href="#contact">Contact</a>
@@ -163,7 +162,7 @@
 <div class="persistent-mini-player" id="persistent-mini-player" tabindex="0" aria-label="Thanh phát nhạc thu gọn; nhấn để mở trình phát" hidden><img id="mini-cover" src="assets/mv-scene.webp" alt=""/><div class="mini-track-info"><strong id="mini-track-title">Thanh Xuân Ghé Qua</strong><span id="mini-track-artist">Tài ft. Yant</span></div><div class="mini-progress"><span id="mini-progress-fill"></span></div><button type="button" id="mini-player-prev" class="mini-player-prev" aria-label="Bài trước">⏮</button><button type="button" id="mini-player-toggle" class="mini-player-toggle" aria-label="Phát hoặc tạm dừng">▶</button><button type="button" id="mini-player-next" class="mini-player-next" aria-label="Bài tiếp">⏭</button></div>
 
 </main>
-<footer class="site-footer"><a class="footer-logo" data-i18n-aria="logoAria" href="#home">TÀI LÊ ✳</a><span>© <span id="year"></span> · MADE WITH MUSIC &amp; A LITTLE MAGIC</span><button class="back-to-top" data-i18n="backToTop" id="back-to-top" type="button">BACK TO TOP ↑</button></footer>
+<footer class="site-footer"><a class="footer-logo" data-i18n-aria="logoAria" href="#home">Tài Lê ✳</a><span>© <span id="year"></span> · MADE WITH MUSIC &amp; A LITTLE MAGIC</span><button class="back-to-top" data-i18n="backToTop" id="back-to-top" type="button">BACK TO TOP ↑</button></footer>
 <nav aria-label="Điều hướng nhanh trên điện thoại" class="bottom-nav"><a class="bottom-item active" href="#home"><span>⌂</span><small data-i18n="navHome">Home</small></a><a class="bottom-item" href="#music"><span>♫</span><small data-i18n="navMusic">MV</small></a><a class="bottom-item" href="#covers"><span>▶</span><small data-i18n="navCovers">Covers</small></a><a class="bottom-item" href="#about"><span>☆</span><small data-i18n="navAbout">About</small></a><a class="bottom-item" href="#contact"><span>✉</span><small data-i18n="navContact">Contact</small></a></nav>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <dialog aria-labelledby="modal-title" class="work-modal" id="work-modal"><div class="modal-shell"><button aria-label="Đóng" class="modal-close" data-i18n-aria="closeAria" id="modal-close" type="button">✕</button><div class="modal-media" id="modal-media"></div><div class="modal-content"><span class="modal-tag" id="modal-tag"></span><h2 id="modal-title"></h2><p id="modal-description"></p><div class="modal-note" id="modal-note"></div></div></div></dialog>

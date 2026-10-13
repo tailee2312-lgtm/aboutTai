@@ -700,9 +700,9 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
  }
  function refreshWave(){cancelAnimationFrame(raf);raf=0;if(!audio.paused){makeGraph();actx?.resume().catch(()=>{});renderWave()}else if(ctx){renderWave()}}
  // Graph initialization occurs in a visitor interaction to satisfy audio autoplay and WebAudio rules.
- document.addEventListener('pointerdown',e=>{if(e.target.closest('#player-play,#player-next,#player-prev,#mini-player-toggle,.track-row,.v14-song-star,.v14-mood-button'))makeGraph()},{capture:true,passive:true});
- audio.addEventListener('play',()=>{document.body.classList.add('v14-is-playing');refreshWave()});
- audio.addEventListener('pause',()=>{document.body.classList.remove('v14-is-playing');refreshWave()});
+ document.addEventListener('pointerdown',e=>{if(e.target.closest('#player-play,#player-next,#player-prev,#mini-player-toggle,.track-row,.v14-song-star,.v14-mood-button,.mini-player-next,.mini-player-prev,[data-track-index]')){makeGraph();actx?.resume().catch(()=>{})}},{capture:true,passive:true});
+ audio.addEventListener('play',()=>{document.body.classList.add('v14-is-playing');makeGraph();actx?.resume().catch(()=>{});refreshWave()});
+ audio.addEventListener('pause',()=>{document.body.classList.remove('v14-is-playing');window.TAI_AUDIO_LEVELS={bass:0,mid:0,high:0};refreshWave()});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(!audio.paused)renderWave()});
  function refresh(){setAccent();starRoot?.querySelectorAll('.v14-song-star').forEach((el,i)=>el.classList.toggle('is-current',i===current));}
  window.addEventListener('portalverse:trackchange',e=>{current=e.detail.index;refresh()});
@@ -796,7 +796,7 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
  const $=s=>document.querySelector(s);
  const overlay=$('#rift-transition');
- const valid=['pulse','spiral','ribbon'];
+ const valid=['pulse','spiral','ribbon','comet','constellation','horizon'];
  let choice='pulse';
  try{const value=localStorage.getItem('tai-transition-choice');if(valid.includes(value))choice=value}catch{}
  const sampleButtons=[...document.querySelectorAll('[data-transition-choice]')];
@@ -814,8 +814,8 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
    overlay.classList.add('is-active');
    let arrived=false;
    const arrive=()=>{if(!arrived){arrived=true;route?.()}};
-   pending=setTimeout(arrive,530);
-   setTimeout(()=>{arrive();clean()},1140);
+   pending=setTimeout(arrive,620);
+   setTimeout(()=>{arrive();clean()},1320);
    return true;
  }
  // Preview controls don't navigate or interrupt music. Choice persists across reloads.
@@ -831,9 +831,9 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
  };
  // A translated sample gallery without injecting labels into permanent navigation.
  const localized={
-   vi:{transitionsOverline:'HOẠT ẢNH',transitionsTitle:'Thử chuyển cảnh',transitionsLead:'Chọn một hiệu ứng để xem thử. Hiệu ứng đã chọn sẽ dùng khi chuyển giữa các trang.',tryNow:'Xem thử'},
-   en:{transitionsOverline:'PAGE MOTION',transitionsTitle:'Preview transitions',transitionsLead:'Try any effect. Your selection will be used between pages.',tryNow:'Preview'},
-   ja:{transitionsOverline:'画面の切り替え',transitionsTitle:'切り替えを試す',transitionsLead:'効果を選んでプレビューできます。選択した効果がページ切り替え時に使われます。',tryNow:'プレビュー'}
+   vi:{transitionsOverline:'HOẠT ẢNH',transitionsTitle:'Thử chuyển cảnh',transitionsLead:'Thử sáu hiệu ứng. Chọn một kiểu để dùng khi chuyển trang.',tryNow:'Xem thử'},
+   en:{transitionsOverline:'PAGE MOTION',transitionsTitle:'Preview transitions',transitionsLead:'Preview six effects. Your choice will be used between pages.',tryNow:'Preview'},
+   ja:{transitionsOverline:'画面の切り替え',transitionsTitle:'切り替えを試す',transitionsLead:'6種類の演出を試せます。選んだ演出がページ切り替え時に使われます。',tryNow:'プレビュー'}
  };
  function translate(){const l=localized[document.documentElement.lang]||localized.vi;document.querySelectorAll('[data-tai-lang]').forEach(el=>el.textContent=l[el.dataset.taiLang]||'')}
  translate();new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
@@ -855,10 +855,29 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
   const rings=[...sky.querySelectorAll('.v14-orbit-ring')];
   const songs=[...sky.querySelectorAll('.v14-song-star')];
   const map=[0,1,2,0,1],offsets=[.08,.37,.67,.55,.85];
-  const period=[43,59,72,91,108],direction=[1,-1,1,-1,1];
+  const period=[24,29,35,41,47],direction=[1,-1,1,-1,1];
   const sizes=rings.map(()=>({x:0,y:0,ang:0}));
+  const NS='http://www.w3.org/2000/svg';
+  const trailSvg=document.createElementNS(NS,'svg');trailSvg.setAttribute('class','electron-trail-field');trailSvg.setAttribute('aria-hidden','true');
+  const colors=['#73efff','#fd8ddb','#e3c3ff','#ffe07e','#8ffdd7'];
+  const tracks=songs.map((_,i)=>{
+    const grad=document.createElementNS(NS,'linearGradient');grad.id=`electron-gradient-${i}`;
+    grad.setAttribute('x1','0%');grad.setAttribute('x2','100%');
+    for(const [off,alpha] of [['0%','0'],['55%','.25'],['100%','.95']]){
+      const stop=document.createElementNS(NS,'stop');stop.setAttribute('offset',off);
+      stop.setAttribute('stop-color',colors[i]);stop.setAttribute('stop-opacity',alpha);grad.append(stop);
+    }
+    const defs=trailSvg.querySelector('defs')||document.createElementNS(NS,'defs');if(!defs.parentNode)trailSvg.append(defs);defs.append(grad);
+    const path=document.createElementNS(NS,'path');path.setAttribute('fill','none');path.setAttribute('stroke',`url(#electron-gradient-${i})`);
+    path.setAttribute('stroke-width','3');path.setAttribute('stroke-linecap','round');path.setAttribute('class','electron-comet-path');
+    trailSvg.append(path);return path;
+  });
+  sky.insertBefore(trailSvg,songs[0]||null);
+  function ellipsePoint(orbit,theta){const ex=orbit.x*Math.cos(theta),ey=orbit.y*Math.sin(theta);return [ex*Math.cos(orbit.ang)-ey*Math.sin(orbit.ang),ex*Math.sin(orbit.ang)+ey*Math.cos(orbit.ang)]}
+
   let visible=true,elapsed=0,last=0;
   function measure(){
+    const bounds=sky.getBoundingClientRect();trailSvg.setAttribute('viewBox',`0 0 ${Math.max(1,bounds.width)} ${Math.max(1,bounds.height)}`);
     rings.forEach((ring,i)=>{
       const s=getComputedStyle(ring);
       sizes[i]={x:Math.max(0,(ring.offsetWidth-parseFloat(s.borderLeftWidth||'0'))/2),
@@ -869,12 +888,21 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
   function position(){songs.forEach((song,i)=>{
     const orbit=sizes[map[i]];if(!orbit)return;
     const a=(offsets[i]+direction[i]*elapsed/period[i])*Math.PI*2;
-    const ex=orbit.x*Math.cos(a),ey=orbit.y*Math.sin(a);
-    const x=ex*Math.cos(orbit.ang)-ey*Math.sin(orbit.ang);
-    const y=ex*Math.sin(orbit.ang)+ey*Math.cos(orbit.ang);
+    const [x,y]=ellipsePoint(orbit,a);
     song.style.setProperty('--orbit-x',x.toFixed(2)+'px');
     song.style.setProperty('--orbit-y',y.toFixed(2)+'px');
     song.dataset.orbitRing=String(map[i]);
+    // The comet tail samples points on the SAME ellipse, rather than a straight-line CSS trail.
+    // A small angular arc follows the moving cover regardless of orbit speed or direction.
+    const w=sky.clientWidth/2,h=sky.clientHeight/2;
+    const tailLength=.38;
+    let d='';
+    for(let j=0;j<=13;j++){
+      const theta=a-direction[i]*tailLength*(1-j/13);
+      const [px,py]=ellipsePoint(orbit,theta);
+      d+=(j?' L':'M')+(w+px).toFixed(2)+' '+(h+py).toFixed(2);
+    }
+    tracks[i].setAttribute('d',d);
   })}
   measure();position();
   if('ResizeObserver'in window)new ResizeObserver(()=>{measure();position()}).observe(sky);
@@ -897,11 +925,20 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
  const playing=()=>!!(audio&&!audio.paused);
  if(audio){audio.addEventListener('play',()=>document.body.classList.add('music-playing'));audio.addEventListener('pause',()=>document.body.classList.remove('music-playing'));audio.addEventListener('ended',()=>document.body.classList.remove('music-playing'))}
  function atmos(now){
-   if(now-lastVisual>70&&!document.hidden){
+   if(now-lastVisual>40&&!document.hidden){
      const f=playing()?window.TAI_AUDIO_LEVELS||{bass:0,mid:0,high:0}:{bass:0,mid:0,high:0};
-     bass+=((f.bass||0)-bass)*.16;mid+=((f.mid||0)-mid)*.16;high+=((f.high||0)-high)*.16;
+     bass+=((f.bass||0)-bass)*.21;mid+=((f.mid||0)-mid)*.19;high+=((f.high||0)-high)*.22;
      const s=document.documentElement.style;
      s.setProperty('--audio-bass',bass.toFixed(3));s.setProperty('--audio-mid',mid.toFixed(3));s.setProperty('--audio-high',high.toFixed(3));
+     const energy=Math.min(1,bass*.8+mid*.35+high*.35);
+     // Browser-safe final numbers: do not rely on calc() multiplying two CSS numeric values.
+     s.setProperty('--nebula-opacity',(.36+energy*.49).toFixed(3));
+     s.setProperty('--nebula-scale',(1+energy*.29).toFixed(3));
+     s.setProperty('--rhythm-opacity',(.08+energy*.64).toFixed(3));
+     s.setProperty('--rhythm-scale',(1+energy*.19).toFixed(3));
+     s.setProperty('--sky-bright',(1+high*.95+bass*.27).toFixed(3));
+     s.setProperty('--sky-drift',(mid*11).toFixed(1)+'px');
+     s.setProperty('--stage-saturate',(1+energy*.33).toFixed(3));
      lastVisual=now;
    }
    requestAnimationFrame(atmos);

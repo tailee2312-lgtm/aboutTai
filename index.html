@@ -15,13 +15,13 @@
 <!-- Japanese CJK glyphs fall back to a dedicated Japanese font; Latin/Vietnamese use Lato. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet" />
 <script defer src="content.js"></script><script defer src="app.js"></script>
 </head>
 <body data-view="home">
 <div class="universe-sky" id="universe-sky" aria-hidden="true">
  <div class="universe-stage stage-home"></div><div class="universe-stage stage-music"></div><div class="universe-stage stage-products"></div>
- <div class="universe-nebula"></div><div class="universe-stars" id="universe-stars"></div>
+ <div class="universe-nebula"></div><div class="universe-rhythm"></div><div class="universe-stars" id="universe-stars"></div>
 </div>
 <a class="skip-link" data-i18n="skipLink" href="#main">Chuyển đến nội dung</a>
 <div aria-hidden="true" class="reading-progress" id="reading-progress"></div>
@@ -31,6 +31,9 @@
 <!-- Single page transition: center pulse with a contained, custom star flash. -->
 <div aria-hidden="true" class="rift-transition" id="rift-transition">
  <span class="tai-transition-backdrop"></span><span class="tai-transition-halo"></span><span class="tai-transition-spiral"></span><span class="tai-transition-star"></span><span class="tai-transition-ribbon"></span>
+ <span class="tai-transition-comets"><i></i><i></i><i></i><i></i></span>
+ <span class="tai-transition-constellation"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+ <span class="tai-transition-iris"></span>
 </div>
 <div aria-hidden="true" class="realm-status"><span class="realm-status-orb"></span><span id="realm-status-text">HOME UNIVERSE</span></div>
 <header class="site-header" id="home">
@@ -111,11 +114,14 @@
 <div class="mystery-lab"><div class="toy-top"><span class="toy-label" data-i18n="mysteryLabel">02 · THE UNKNOWN</span><span class="toy-orbit">✦ ✶ ✧</span></div><div aria-hidden="true" class="mystery-object"><span class="mystery-ring one"></span><span class="mystery-ring two"></span><span class="mystery-core">?</span></div><h3 data-i18n="mysteryTitle">Cổng bí ẩn</h3><p data-i18n="mysteryDesc">Không ai biết cánh cổng sẽ đưa bạn đến đâu...</p><button class="mystery-button" id="mystery-portal-button" type="button"><span data-i18n="mysteryGo">THỬ VẬN MAY</span> ↗</button></div>
 </div>
 <section class="travel-gallery" aria-labelledby="travel-gallery-heading">
- <div class="travel-gallery-intro"><span class="toy-label" data-tai-lang="transitionsOverline">CHUYỂN CẢNH</span><h3 id="travel-gallery-heading" data-tai-lang="transitionsTitle">Ba cách dịch chuyển</h3><p data-tai-lang="transitionsLead">Chọn một kiểu và xem thử. Kiểu đã chọn sẽ dùng khi sang trang khác.</p></div>
+ <div class="travel-gallery-intro"><span class="toy-label" data-tai-lang="transitionsOverline">CHUYỂN CẢNH</span><h3 id="travel-gallery-heading" data-tai-lang="transitionsTitle">Sáu cách dịch chuyển</h3><p data-tai-lang="transitionsLead">Chọn một kiểu và xem thử. Kiểu đã chọn sẽ dùng khi sang trang khác.</p></div>
  <div class="travel-gallery-options" role="group" aria-label="Chọn chuyển cảnh">
   <button class="travel-option is-selected" type="button" data-transition-choice="pulse" aria-pressed="true"><span class="travel-orb orb-pulse"></span><span class="travel-name">Center Pulse + Star Flash</span><small data-tai-lang="tryNow">Xem thử</small></button>
   <button class="travel-option" type="button" data-transition-choice="spiral" aria-pressed="false"><span class="travel-orb orb-spiral"></span><span class="travel-name">Galaxy Spiral Dissolve</span><small data-tai-lang="tryNow">Xem thử</small></button>
   <button class="travel-option" type="button" data-transition-choice="ribbon" aria-pressed="false"><span class="travel-orb orb-ribbon"></span><span class="travel-name">Nebula Ribbon</span><small data-tai-lang="tryNow">Xem thử</small></button>
+  <button class="travel-option" type="button" data-transition-choice="comet" aria-pressed="false"><span class="travel-orb orb-comet"></span><span class="travel-name">Comet Curtain</span><small data-tai-lang="tryNow">Xem thử</small></button>
+  <button class="travel-option" type="button" data-transition-choice="constellation" aria-pressed="false"><span class="travel-orb orb-constellation"></span><span class="travel-name">Constellation Morph</span><small data-tai-lang="tryNow">Xem thử</small></button>
+  <button class="travel-option" type="button" data-transition-choice="horizon" aria-pressed="false"><span class="travel-orb orb-horizon"></span><span class="travel-name">Event Horizon Iris</span><small data-tai-lang="tryNow">Xem thử</small></button>
  </div>
 </section>
 <div class="star-quest" id="star-quest"><div><span class="quest-eyebrow" data-i18n="questEyebrow">✶ THE STAR HUNT</span><h3 data-i18n="questTitle">Có 5 ngôi sao đang trốn đâu đó...</h3><p data-i18n="questDesc">Tìm chúng trong các thế giới để nhận một bất ngờ nhỏ.</p></div><div aria-live="polite" class="quest-counter"><span id="star-count">0</span> / 5 <span aria-hidden="true">✦</span></div></div>

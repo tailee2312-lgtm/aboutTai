@@ -19,16 +19,16 @@
 <link href="v14.css" rel="stylesheet"/>
 <link href="v16.css" rel="stylesheet"/>
 <link href="v17.css" rel="stylesheet"/>
-<link href="v18.css" rel="stylesheet"/>
-<link href="v19.css" rel="stylesheet"/>
-<link href="v20.css" rel="stylesheet"/>
+<link href="v18.css?v=2.1.0" rel="stylesheet"/>
+<link href="v19.css?v=2.1.0" rel="stylesheet"/>
+<link href="motion.css?v=2.1.0" rel="stylesheet"/>
 <script defer="" src="config.js"></script>
 <script defer="" src="i18n.js"></script>
-<script defer="" src="app.js"></script>
+<script defer="" src="app.js?v=2.1.0"></script>
 <script defer="" src="v13-content.js"></script>
 <script defer="" src="v13.js"></script>
 <script defer="" src="v14.js"></script>
-<script defer="" src="v19.js"></script>
+<script defer="" src="motion.js?v=2.1.0"></script>
 <link rel="stylesheet" href="portal-glyphs.css"/>
 </head>
 <body>
@@ -37,12 +37,10 @@
 <div aria-hidden="true" class="cosmos"><div class="stars" id="stars"></div><div class="nebula nebula-a"></div><div class="nebula nebula-b"></div><div class="nebula nebula-c"></div></div>
 <div aria-hidden="true" class="pointer-aura" id="pointer-aura"></div>
 <!-- Portal travel is decorative; navigation remains semantic and keyboard-accessible. -->
-<div aria-hidden="true" class="rift-transition" id="rift-transition">
-<div class="rift-depth rift-depth-back"></div>
-<div class="rift-depth rift-depth-mid"></div>
-<div class="rift-depth rift-depth-front"></div>
-<div class="rift-blackhole"><span>✦</span></div><canvas aria-hidden="true" id="wormhole-canvas"></canvas><div aria-hidden="true" class="rift-shockwave"></div><div aria-hidden="true" class="rift-whiteout"></div>
-<div class="rift-caption"><small id="rift-counter">DIMENSION 01 / 03</small><strong id="rift-name">MUSIC GALAXY</strong><span>TRAVELING BETWEEN WORLDS <i>✳</i></span></div>
+<!-- Single page transition: center pulse with a contained, custom star flash. -->
+<div aria-hidden="true" class="rift-transition" id="rift-transition" data-motion="pulse">
+  <span class="tai-pulse-halo"></span>
+  <span class="tai-pulse-star"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 3 C55 32 68 45 97 50 C68 55 55 68 50 97 C45 68 32 55 3 50 C32 45 45 32 50 3 Z" fill="currentColor"/><circle cx="50" cy="50" r="8" fill="#fff"/></svg></span>
 </div>
 <div aria-hidden="true" class="realm-status"><span class="realm-status-orb"></span><span id="realm-status-text">HOME UNIVERSE</span></div>
 <header class="site-header" id="home">

@@ -178,28 +178,15 @@
     element.scrollIntoView({behavior:'instant',block:'start'});
     updateNav();
   }
-  // Lightweight GPU-composited transition: no particles, canvas or per-frame JS work.
+  // Real page changes have one dedicated controller. In-page navigation never animates.
   function travelTo(target,realm=target){
-    if(traveling||target.startsWith('/'))return;
-    const desired=target==='route-music'?'music':target==='route-products'?'products':target==='home'?'home':null;
-    if(desired && document.body.dataset.view===desired)return;
-    if(target!=='home'&&!$('#'+target))return;
-    if(!desired){navigateTo(target,realm);return;}
-    traveling=true;
-    const info=realmNames[realm]||realmNames[target]||realmNames.home;
-    $('#rift-counter').textContent=`DIMENSION ${info[0]}`;
-    $('#rift-name').textContent=t(info[1]);
-    rift.style.setProperty('--travel-color',info[2]);
-    // Four random light-weight scene transitions. Only true page changes reach travelTo.
-    const variant='pulse'; // The only page transition: Center Pulse + Star Flash.
-    rift.dataset.motion=variant;
-    rift.classList.remove('is-exiting');
-    rift.classList.add('is-active');
-    const arrive=()=>{if(desired)window.PORTALVERSE_ROUTE?.(desired);else navigateTo(target,realm)};
-    if(prefersReducedMotion){arrive();rift.classList.remove('is-active');traveling=false;return}
-    clearTimeout(travelTimer1);clearTimeout(travelTimer2);
-    travelTimer1=setTimeout(()=>{arrive();rift.classList.add('is-exiting')},260);
-    travelTimer2=setTimeout(()=>{rift.classList.remove('is-active','is-exiting');traveling=false},620);
+    const page=(target==='route-music'||target==='music')?'music':(target==='route-products'||target==='products')?'products':target==='home'?'home':null;
+    if(page){
+      if(typeof window.TAI_PAGE_TRANSITION==='function')window.TAI_PAGE_TRANSITION(page);
+      else window.PORTALVERSE_ROUTE?.(page);
+      return;
+    }
+    navigateTo(target,realm);
   }
   function mysteryTravel(){
     const destinations=[['music','music'],['covers','piano'],['covers','guitar'],['about','about'],['playground','portal-map']];
@@ -406,7 +393,6 @@
     }
     $$('.extra-work').forEach(el=>{const item=byId(el.dataset.openWork);if(item){el.querySelector('strong').textContent=item.title}});
     $('#realm-status-text').textContent=t(realmNames[document.body.dataset.realm||'home']?.[1]||'realmHome');
-    $('#rift-name').textContent=t(realmNames[document.body.dataset.realm||'home']?.[1]||'realmHome');
     if(modal?.open)$('#modal-note').textContent=$('#modal-media iframe, #modal-media video')?t('videoNote'):t('previewNote');
     populateSocials();updateStars();
     if(save)try{localStorage.setItem('portalverse-language',next)}catch{}

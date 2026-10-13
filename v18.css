@@ -35,37 +35,7 @@
 .v18-star-particles i:nth-child(4n){background:#f2ff88;width:7px;height:7px}
 @keyframes v18-star-collapse{0%{scale:1;opacity:1}21%{scale:1.16;opacity:1}55%{scale:.3;opacity:.3}100%{scale:1;opacity:1}}
 @keyframes v18-particle-burst{0%{opacity:1;transform:translate3d(0,0,0) scale(1.3)}65%{opacity:.95}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) scale(.12)}}
-/* Page transitions use composited transforms and opacity only; no canvas or animated blur. */
-#rift-transition{position:fixed!important;inset:0!important;isolation:isolate;overflow:hidden;z-index:1000;background:transparent!important;visibility:hidden;opacity:0;pointer-events:none!important;transition:opacity .12s ease-out,visibility 0s .12s!important;contain:layout paint}
-#rift-transition.is-active{visibility:visible;opacity:1;transition:opacity .08s ease-out,visibility 0s!important}
-#rift-transition.is-exiting{opacity:0!important;transition:opacity .27s ease-out!important}
-#rift-transition>:not(style){display:none!important}
-#rift-transition::before,#rift-transition::after{content:"";position:absolute;display:block;pointer-events:none;will-change:transform,opacity;animation-duration:.59s;animation-fill-mode:both;animation-timing-function:cubic-bezier(.26,.7,.22,1);box-shadow:none!important;filter:none!important}
-#rift-transition[data-motion="glass"]::before{inset:-30% 0;background:linear-gradient(100deg,transparent 0%,#21105fcc 20%,#64e8ffdb 49%,#6326adcc 74%,transparent 100%);transform:translate3d(-130%,0,0) skewX(-15deg)}
-#rift-transition[data-motion="glass"].is-active::before{animation-name:v18-glass}
-#rift-transition[data-motion="glass"]::after{inset:0;background:linear-gradient(90deg,transparent,#b0ffff58,transparent);width:25%;transform:translate3d(-125vw,0,0) skewX(-18deg)}
-#rift-transition[data-motion="glass"].is-active::after{animation-name:v18-glass-line}
-@keyframes v18-glass{0%{transform:translate3d(-130%,0,0) skewX(-15deg);opacity:.1}35%{opacity:.85}100%{transform:translate3d(130%,0,0) skewX(-15deg);opacity:.15}}
-@keyframes v18-glass-line{from{transform:translate3d(-125vw,0,0) skewX(-18deg);opacity:0}35%{opacity:1}to{transform:translate3d(135vw,0,0) skewX(-18deg);opacity:0}}
-#rift-transition[data-motion="fold"]::before{inset:-20%;background:linear-gradient(120deg,#120a30 0%,#4b24c6 32%,#ad92ff 48%,#4ee5ff 55%,#140c36 82%);transform:translate3d(-110vw,0,0) skewX(22deg)}
-#rift-transition[data-motion="fold"].is-active::before{animation-name:v18-fold}
-#rift-transition[data-motion="fold"]::after{inset:-25%;background:linear-gradient(130deg,transparent 35%,#ffffffb0 47%,transparent 56%);transform:translate3d(-115vw,0,0) skewX(18deg)}
-#rift-transition[data-motion="fold"].is-active::after{animation-name:v18-fold-glint}
-@keyframes v18-fold{0%{transform:translate3d(-110vw,0,0) skewX(22deg);opacity:.2}40%{opacity:.9}100%{transform:translate3d(110vw,0,0) skewX(22deg);opacity:.1}}
-@keyframes v18-fold-glint{from{transform:translate3d(-115vw,0,0) skewX(18deg);opacity:.1}50%{opacity:.85}to{transform:translate3d(115vw,0,0) skewX(18deg);opacity:0}}
-#rift-transition[data-motion="sweep"]::before{inset:-35% -40%;background:repeating-linear-gradient(110deg,transparent 0 18px,#74e9ffbb 19px 21px,transparent 22px 45px,#ff7bdbaa 46px 48px,transparent 49px 90px),linear-gradient(115deg,#100b38cc,#151043ad);transform:translate3d(-120vw,0,0)}
-#rift-transition[data-motion="sweep"].is-active::before{animation-name:v18-sweep}
-#rift-transition[data-motion="sweep"]::after{inset:-30% 0;background:linear-gradient(115deg,transparent 30%,#f6ffffc2 48%,transparent 55%);width:60%;transform:translate3d(-100vw,0,0)}
-#rift-transition[data-motion="sweep"].is-active::after{animation-name:v18-sweep-line}
-@keyframes v18-sweep{0%{transform:translate3d(-120vw,0,0);opacity:.13}45%{opacity:.9}100%{transform:translate3d(120vw,0,0);opacity:.08}}
-@keyframes v18-sweep-line{0%{transform:translate3d(-100vw,0,0);opacity:0}45%{opacity:1}100%{transform:translate3d(140vw,0,0);opacity:0}}
-#rift-transition[data-motion="pulse"]::before{top:50%;left:50%;width:70vmin;height:70vmin;border:4px solid #b2ffff;border-radius:50%;background:radial-gradient(circle,#ffffff70 0%,#974bfa8c 34%,#5227c7b8 67%,transparent 73%);transform:translate3d(-50%,-50%,0) scale(.05)}
-#rift-transition[data-motion="pulse"].is-active::before{animation-name:v18-pulse}
-#rift-transition[data-motion="pulse"]::after{inset:0;background:radial-gradient(circle,#d0fbff90 0%,#993ffb33 28%,transparent 62%);opacity:0}
-#rift-transition[data-motion="pulse"].is-active::after{animation-name:v18-pulse-glow}
-@keyframes v18-pulse{0%{transform:translate3d(-50%,-50%,0) scale(.05);opacity:0}35%{opacity:.95}100%{transform:translate3d(-50%,-50%,0) scale(4);opacity:0}}
-@keyframes v18-pulse-glow{0%,100%{opacity:0}48%{opacity:.74}}
-@media(prefers-reduced-motion:reduce){
- #rift-transition,#rift-transition::before,#rift-transition::after{animation:none!important;transition:none!important;display:none!important}
+/* Transition styles are owned exclusively by motion.css. */
+@media (prefers-reduced-motion: reduce) {
  .v14-song-star.v18-bursting img,.v18-star-particles i{animation:none!important}
 }

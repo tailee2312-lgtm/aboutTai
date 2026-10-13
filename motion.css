@@ -1,0 +1,86 @@
+/* Tài Lê motion system: only one page transition and one orbital controller.
+   Do not add animation overrides to versioned CSS files. */
+.wordmark,.footer-logo{
+  font-family:'Cormorant Garamond',Georgia,serif!important;
+  font-weight:700!important;font-style:italic!important;
+  letter-spacing:-.035em!important;text-transform:none!important;
+  transform:none!important;line-height:1.12!important;
+  text-shadow:0 0 18px #9a6bff70,0 3px 14px #21124a!important;
+}
+.wordmark{font-size:clamp(30px,3.4vw,47px)!important;padding:7px 7px 9px 0!important}
+.footer-logo{font-size:clamp(30px,4.1vw,51px)!important}
+
+/* Orbit: all rings and songs share one measured coordinate system (motion.js). */
+#v14-constellation{position:relative;isolation:isolate;overflow:visible}
+#v14-constellation .v14-orbit-ring{
+  position:absolute!important;inset:auto!important;top:50%!important;left:50%!important;
+  box-sizing:border-box!important;border-radius:50%;transform-origin:center center!important;
+  animation:none!important;transition:none!important;will-change:transform;
+}
+#v14-constellation .ring-a{width:68%!important;height:66%!important;border-color:#59e8ff8c!important}
+#v14-constellation .ring-b{width:88%!important;height:45%!important;border-color:#ff82d98a!important}
+#v14-constellation .ring-c{width:53%!important;height:81%!important;border-color:#d6a3ff83!important}
+#v14-constellation .v14-song-star{
+  position:absolute!important;top:50%!important;left:50%!important;bottom:auto!important;right:auto!important;
+  margin:0!important;transform:translate3d(calc(-50% + var(--orbit-x,0px)),calc(-50% + var(--orbit-y,0px)),0)!important;
+  transition:filter .16s ease!important;animation:none!important;
+  z-index:5;will-change:transform;
+}
+#v14-constellation .v14-song-star:hover,#v14-constellation .v14-song-star:focus-visible,
+#v14-constellation .v14-song-star.is-current{transform:translate3d(calc(-50% + var(--orbit-x,0px)),calc(-50% + var(--orbit-y,0px)),0)!important}
+#v14-constellation .v14-song-star:hover,#v14-constellation .v14-song-star:focus-visible{filter:brightness(1.18) drop-shadow(0 0 8px #64ebff99)}
+#v14-constellation .v14-song-star img{transition:scale .18s ease,filter .18s ease!important}
+#v14-constellation .v14-song-star:hover img,#v14-constellation .v14-song-star:focus-visible img{scale:1.07}
+#v14-constellation .v14-song-star.is-current img{scale:1.02}
+
+/* Only Center Pulse + Star Flash. The transition has no legacy wormhole layers. */
+#rift-transition{
+  position:fixed!important;inset:0!important;z-index:1000!important;isolation:isolate;
+  display:block!important;background:transparent!important;overflow:hidden;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  transition:none!important;contain:layout paint;
+}
+#rift-transition.is-active{visibility:visible!important;opacity:1!important}
+#rift-transition::before,#rift-transition::after{content:none!important;animation:none!important}
+#rift-transition .tai-pulse-halo{
+  position:absolute;top:50%;left:50%;width:35vmin;height:35vmin;display:block;
+  border:2px solid #b7f9ffad;border-radius:50%;
+  background:radial-gradient(circle,#b5f9ff4a 0 10%,#8046dd78 28%,#39168538 60%,transparent 73%);
+  opacity:0;transform:translate3d(-50%,-50%,0) scale(.06);will-change:transform,opacity;
+  box-shadow:0 0 45px #6c6dff33;
+}
+#rift-transition .tai-pulse-star{
+  position:absolute;left:50%;top:50%;width:68px;height:68px;display:block;
+  color:#cbfcff;opacity:0;transform:translate3d(-50%,-50%,0) scale(.14);
+  filter:drop-shadow(0 0 9px #ebd9ff);will-change:transform,opacity;
+}
+#rift-transition .tai-pulse-star svg{width:100%;height:100%;display:block}
+#rift-transition.is-active .tai-pulse-halo{animation:tai-center-pulse .6s cubic-bezier(.2,.6,.22,1) both}
+#rift-transition.is-active .tai-pulse-star{animation:tai-star-flash .6s cubic-bezier(.2,.68,.25,1) both}
+@keyframes tai-center-pulse{
+  0%{opacity:0;transform:translate3d(-50%,-50%,0) scale(.06)}
+  35%{opacity:.83}70%{opacity:.4}
+  100%{opacity:0;transform:translate3d(-50%,-50%,0) scale(7.5)}
+}
+@keyframes tai-star-flash{
+  0%,24%{opacity:0;transform:translate3d(-50%,-50%,0) scale(.13)}
+  45%{opacity:1;transform:translate3d(-50%,-50%,0) scale(1.1)}
+  75%{opacity:.65}
+  100%{opacity:0;transform:translate3d(-50%,-50%,0) scale(2.7)}
+}
+@media(max-width:780px){
+ .wordmark{font-size:clamp(28px,7.2vw,36px)!important}
+ #v14-constellation .ring-a{width:65%!important;height:46%!important}
+ #v14-constellation .ring-b{width:79%!important;height:36%!important}
+ #v14-constellation .ring-c{width:50%!important;height:60%!important}
+ #v14-constellation .v14-song-star span{font-size:11px!important}
+}
+@media(max-width:375px){
+ #v14-constellation .ring-a{width:61%!important}
+ #v14-constellation .ring-b{width:77%!important}
+ #v14-constellation .v14-song-star span{font-size:10.5px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #rift-transition,#rift-transition *{animation:none!important;transition:none!important}
+ #v14-constellation .v14-orbit-ring,#v14-constellation .v14-song-star{will-change:auto}
+}

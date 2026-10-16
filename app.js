@@ -176,7 +176,7 @@
     else if(target==='covers')switchDimension('both');
     showRealm(realm||target);
     if(changeHash && location.hash!=='#'+target){try{history.pushState({},'', '#'+target)}catch{ /* Embedded previews may have an opaque origin. */ }}
-    element.scrollIntoView({behavior:'instant',block:'start'});
+    element.scrollIntoView({behavior:prefersReducedMotion?'instant':'smooth',block:'start'});
     updateNav();
   }
   // Real page changes have one dedicated controller. In-page navigation never animates.
@@ -483,19 +483,38 @@
   document.body.dataset.realm=next==='products'?'products':next==='music'?'music':'home';
   document.title=`${next==='music'?tr('navMusic')+' · ':next==='products'?tr('navProducts')+' · ':''}TÀI LÊ | Music & Digital Creations`;
   document.body.classList.remove('karaoke-max');$('#karaoke-focus').textContent=tr('karaokeFocus');
-  if(next==='home'&&anchor&&$('#'+anchor)){window.scrollTo({top:0,behavior:'instant'});setTimeout(()=>$('#'+anchor)?.scrollIntoView({block:'start',behavior:'instant'}),20)}else{window.scrollTo({top:0,behavior:'instant'})}
+  if(next==='home'&&anchor&&$('#'+anchor)){window.scrollTo({top:0,behavior:'instant'});requestAnimationFrame(()=>requestAnimationFrame(()=>$('#'+anchor)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})))}else{window.scrollTo({top:0,behavior:'instant'})}
   const mini=$('#persistent-mini-player');mini.hidden=!startedAudio;
  }
- window.PORTALVERSE_ROUTE=(page)=>{setRoute(page);setHash(page)};
+ window.PORTALVERSE_ROUTE=(page,anchor='')=>{setRoute(page,anchor);setHash(anchor||page)};
  function setHash(next){const h=`#/${next}`;if(location.hash!==h){try{history.pushState(null,'',h)}catch{location.hash=h}}}
  function readHash(){const m=/^#\/(home|music|products|about|contact)/.exec(location.hash);return m?m[1]:'home'}
  function routeFromHash(){const r=readHash();setRoute(r,r==='about'||r==='contact'?r:'')}
- function go(next,withWarp=true){if(next===route&&!['about','contact'].includes(next))return;if(['about','contact'].includes(next)){setHash(next);setRoute(next,next);return}
-  if(withWarp&&typeof window.PORTALVERSE_TRAVEL==='function'&&['music','products','home'].includes(next))window.PORTALVERSE_TRAVEL(next==='home'?'home':next==='music'?'route-music':'route-products',next);
-  else{setHash(next);setRoute(next)}
- }
+ function go(next,withWarp=true){
+   const anchor=['about','contact'].includes(next)?next:'';
+   const page=anchor?'home':next;
+   if(!['home','music','products'].includes(page))return;
+   if(page===route){
+     if(anchor){setHash(anchor);$('#'+anchor)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})}
+     else if(next==='home'){setHash('home');window.scrollTo({top:0,behavior:'smooth'})}
+     return;
+   }
+   if(withWarp && typeof window.TAI_PAGE_TRANSITION==='function')window.TAI_PAGE_TRANSITION(page,anchor);
+   else window.PORTALVERSE_ROUTE(page,anchor);
+  }
  // Capture internal hash-route navigation before old anchor handlers. Nothing reloads: music keeps playing.
- document.addEventListener('click',e=>{const link=e.target.closest('a[href^="#/"]');if(link){e.preventDefault();e.stopImmediatePropagation();const key=link.getAttribute('href').split('/')[1];go(key,['home','music','products'].includes(key));}},true);
+ document.addEventListener('click',e=>{
+    const link=e.target.closest('a[href^="#"]');if(!link)return;
+    const hash=link.getAttribute('href');if(!hash)return;
+    const key=hash.startsWith('#/')?hash.slice(2):hash.slice(1);
+    if(!['home','music','products','about','contact'].includes(key))return;
+    if(e.ctrlKey||e.metaKey||e.altKey||e.shiftKey||e.button)return;
+    e.preventDefault();e.stopImmediatePropagation();
+    const mobile=document.getElementById('mobile-menu'),trigger=document.getElementById('menu-button');
+    if(mobile)mobile.hidden=true;
+    trigger?.setAttribute('aria-expanded','false');
+    go(key,true);
+   },true);
  document.addEventListener('click',e=>{const button=e.target.closest('[data-v13-route]');if(button){go(button.dataset.v13Route,true);}},true);
  window.addEventListener('hashchange',routeFromHash);
  window.addEventListener('popstate',routeFromHash);
@@ -642,7 +661,7 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
  // Constellation map with five accessible song selections.
  const layout=$('.music-layout');
  const sky=document.createElement('section');sky.className='v14-starfield-section';sky.setAttribute('aria-label','Interactive music constellation');
- sky.innerHTML=`<div class="v14-starhead"><h2 data-v14="title"></h2><p data-v14="lead"></p></div><div class="v14-constellation" id="v14-constellation"><div class="v14-orbit-ring ring-a"></div><div class="v14-orbit-ring ring-b"></div><div class="v14-orbit-ring ring-c"></div><span class="v14-skyline">TÀI LÊ<br><small>MUSIC · ORBITAL SYSTEM</small></span></div><div class="v14-moods"><div class="v14-moods-head"><h3 data-v14="mood"></h3><p data-v14="moodNote"></p></div><div class="v14-mood-buttons" id="v14-mood-buttons"></div></div>`;
+ sky.innerHTML=`<div class="v14-starhead"><h2 data-v14="title"></h2><p data-v14="lead"></p></div><div class="v14-constellation" id="v14-constellation"><div class="v14-orbit-ring ring-a"></div><div class="v14-orbit-ring ring-b"></div><div class="v14-orbit-ring ring-c"></div><span class="v14-orbit-core" aria-hidden="true"></span></div><div class="v14-moods"><div class="v14-moods-head"><h3 data-v14="mood"></h3><p data-v14="moodNote"></p></div><div class="v14-mood-buttons" id="v14-mood-buttons"></div></div>`;
  layout?.insertAdjacentElement('afterend',sky);
  const starRoot=$('#v14-constellation');
  tracks.forEach((track,i)=>{
@@ -795,48 +814,35 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
  'use strict';
  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
  const $=s=>document.querySelector(s);
+ // One owner for cross-page motion. Same-page anchors never enter this layer.
  const overlay=$('#rift-transition');
- const valid=['pulse','spiral','ribbon','comet','constellation','horizon'];
- let choice='pulse';
- try{const value=localStorage.getItem('tai-transition-choice');if(valid.includes(value))choice=value}catch{}
- const sampleButtons=[...document.querySelectorAll('[data-transition-choice]')];
- function syncChoices(){for(const b of sampleButtons){const on=b.dataset.transitionChoice===choice;b.classList.toggle('is-selected',on);b.setAttribute('aria-pressed',String(on))}}
- syncChoices();
- let pending=null,transitioning=false;
- const clean=()=>{if(overlay)overlay.classList.remove('is-active');transitioning=false;pending=null};
- function playTransition(which,route){
-   if(transitioning){return false}
-   if(!overlay||reduce.matches){if(route)route();return true}
-   transitioning=true;
-   overlay.dataset.effect=valid.includes(which)?which:'pulse';
-   overlay.classList.remove('is-active');
+ const prefersStill=matchMedia('(prefers-reduced-motion: reduce)');
+ let traveling=false,closeTimer=0,finishTimer=0;
+ const finish=()=>{if(overlay){overlay.classList.remove('is-active','is-revealing');overlay.removeAttribute('data-effect')}traveling=false};
+ window.TAI_PAGE_TRANSITION=(destination,anchor='')=>{
+   if(!['home','music','products'].includes(destination)||!window.PORTALVERSE_ROUTE)return;
+   if(traveling)return;
+   if(document.body.dataset.view===destination){
+     if(anchor)document.getElementById(anchor)?.scrollIntoView({block:'start',behavior:prefersStill.matches?'instant':'smooth'});
+     return;
+   }
+   if(!overlay||prefersStill.matches){window.PORTALVERSE_ROUTE(destination,anchor);return}
+   traveling=true;
+   overlay.dataset.effect='horizon';
+   overlay.classList.remove('is-active','is-revealing');
    void overlay.offsetWidth;
    overlay.classList.add('is-active');
-   let arrived=false;
-   const arrive=()=>{if(!arrived){arrived=true;route?.()}};
-   pending=setTimeout(arrive,620);
-   setTimeout(()=>{arrive();clean()},1320);
-   return true;
- }
- // Preview controls don't navigate or interrupt music. Choice persists across reloads.
- for(const b of sampleButtons)b.addEventListener('click',()=>{
-   choice=b.dataset.transitionChoice;syncChoices();
-   try{localStorage.setItem('tai-transition-choice',choice)}catch{}
-   playTransition(choice,null);
- });
- window.TAI_PAGE_TRANSITION=(destination)=>{
-   if(!['home','music','products'].includes(destination)||!window.PORTALVERSE_ROUTE)return;
-   if(transitioning||document.body.dataset.view===destination)return;
-   playTransition(choice,()=>window.PORTALVERSE_ROUTE(destination));
+   let didRoute=false;
+   const change=()=>{if(!didRoute){didRoute=true;window.PORTALVERSE_ROUTE(destination);overlay.classList.add('is-revealing')}};
+   closeTimer=setTimeout(change,530);
+   finishTimer=setTimeout(()=>{
+      change();finish();
+      if(anchor){
+        try{history.replaceState(null,'',`#/${anchor}`)}catch{}
+        requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView({block:'start',behavior:'smooth'}));
+      }
+   },1220);
  };
- // A translated sample gallery without injecting labels into permanent navigation.
- const localized={
-   vi:{transitionsOverline:'HOẠT ẢNH',transitionsTitle:'Thử chuyển cảnh',transitionsLead:'Thử sáu hiệu ứng. Chọn một kiểu để dùng khi chuyển trang.',tryNow:'Xem thử'},
-   en:{transitionsOverline:'PAGE MOTION',transitionsTitle:'Preview transitions',transitionsLead:'Preview six effects. Your choice will be used between pages.',tryNow:'Preview'},
-   ja:{transitionsOverline:'画面の切り替え',transitionsTitle:'切り替えを試す',transitionsLead:'6種類の演出を試せます。選んだ演出がページ切り替え時に使われます。',tryNow:'プレビュー'}
- };
- function translate(){const l=localized[document.documentElement.lang]||localized.vi;document.querySelectorAll('[data-tai-lang]').forEach(el=>el.textContent=l[el.dataset.taiLang]||'')}
- translate();new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
  // Background star layer is independent of the old decorative star quest.
  const field=$('#universe-stars');
  if(field){let seed=872623;const rand=()=>{seed=(1664525*seed+1013904223)>>>0;return seed/4294967296};
@@ -860,18 +866,13 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
   const NS='http://www.w3.org/2000/svg';
   const trailSvg=document.createElementNS(NS,'svg');trailSvg.setAttribute('class','electron-trail-field');trailSvg.setAttribute('aria-hidden','true');
   const colors=['#73efff','#fd8ddb','#e3c3ff','#ffe07e','#8ffdd7'];
-  const tracks=songs.map((_,i)=>{
-    const grad=document.createElementNS(NS,'linearGradient');grad.id=`electron-gradient-${i}`;
-    grad.setAttribute('x1','0%');grad.setAttribute('x2','100%');
-    for(const [off,alpha] of [['0%','0'],['55%','.25'],['100%','.95']]){
-      const stop=document.createElementNS(NS,'stop');stop.setAttribute('offset',off);
-      stop.setAttribute('stop-color',colors[i]);stop.setAttribute('stop-opacity',alpha);grad.append(stop);
-    }
-    const defs=trailSvg.querySelector('defs')||document.createElementNS(NS,'defs');if(!defs.parentNode)trailSvg.append(defs);defs.append(grad);
-    const path=document.createElementNS(NS,'path');path.setAttribute('fill','none');path.setAttribute('stroke',`url(#electron-gradient-${i})`);
-    path.setAttribute('stroke-width','3');path.setAttribute('stroke-linecap','round');path.setAttribute('class','electron-comet-path');
-    trailSvg.append(path);return path;
-  });
+   const tracks=songs.map((_,i)=>{
+     const group=document.createElementNS(NS,'g');group.setAttribute('class','electron-tail-group');
+     const glow=document.createElementNS(NS,'path');glow.setAttribute('fill','none');glow.setAttribute('stroke',colors[i]);glow.setAttribute('stroke-width','11');glow.setAttribute('stroke-linecap','round');glow.setAttribute('opacity','.13');glow.setAttribute('class','electron-comet-halo');
+     const path=document.createElementNS(NS,'path');path.setAttribute('fill','none');path.setAttribute('stroke',colors[i]);path.setAttribute('stroke-width','3.2');path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');path.setAttribute('class','electron-comet-path');
+     const sparks=[.22,.46,.69].map((_,n)=>{const c=document.createElementNS(NS,'circle');c.setAttribute('fill',colors[i]);c.setAttribute('r',String(1.6+n*.55));c.setAttribute('opacity',String(.26+n*.14));group.append(c);return c});
+     group.prepend(glow,path);trailSvg.append(group);return {path,glow,sparks};
+   });
   sky.insertBefore(trailSvg,songs[0]||null);
   function ellipsePoint(orbit,theta){const ex=orbit.x*Math.cos(theta),ey=orbit.y*Math.sin(theta);return [ex*Math.cos(orbit.ang)-ey*Math.sin(orbit.ang),ex*Math.sin(orbit.ang)+ey*Math.cos(orbit.ang)]}
 
@@ -895,14 +896,19 @@ $$('[data-v13]').forEach(el=>{const val=tr(el.dataset.v13);el.textContent=val; i
     // The comet tail samples points on the SAME ellipse, rather than a straight-line CSS trail.
     // A small angular arc follows the moving cover regardless of orbit speed or direction.
     const w=sky.clientWidth/2,h=sky.clientHeight/2;
-    const tailLength=.38;
+    const tailLength=.53;
     let d='';
-    for(let j=0;j<=13;j++){
-      const theta=a-direction[i]*tailLength*(1-j/13);
+    for(let j=0;j<=22;j++){
+      const theta=a-direction[i]*tailLength*(1-j/22);
       const [px,py]=ellipsePoint(orbit,theta);
       d+=(j?' L':'M')+(w+px).toFixed(2)+' '+(h+py).toFixed(2);
     }
-    tracks[i].setAttribute('d',d);
+    tracks[i].path.setAttribute('d',d);tracks[i].glow.setAttribute('d',d);
+    tracks[i].sparks.forEach((dot,n)=>{
+      const theta=a-direction[i]*tailLength*(.23+n*.25);
+      const [px,py]=ellipsePoint(orbit,theta);
+      dot.setAttribute('cx',(w+px).toFixed(1));dot.setAttribute('cy',(h+py).toFixed(1));
+    });
   })}
   measure();position();
   if('ResizeObserver'in window)new ResizeObserver(()=>{measure();position()}).observe(sky);

@@ -800,3 +800,62 @@ body.music-playing .universe-nebula{opacity:var(--nebula-opacity,.4)!important}
 /* Hairline and Thin are reserved for spacious, large-size decorative copy. */
 .hero-side-note{font-weight:100!important;font-size:clamp(18px,1.65vw,24px)!important}
 .hero-subtitle{font-weight:200!important;font-size:clamp(16px,1.4vw,20px)!important;line-height:1.65!important}
+
+/* TÀI LÊ v2.4 — one transition, accessible navigation, balanced music layout */
+/* FIX: the hero had the same stacking index as the header and covered the language menu. */
+.site-header{position:relative!important;z-index:240!important;isolation:isolate}
+.language-switch{position:relative;z-index:250!important}
+.language-menu{z-index:300!important;pointer-events:auto!important}
+.language-menu[hidden]{display:none!important}
+.language-menu button{min-height:43px;cursor:pointer}
+body[data-view="music"] .site-header,body[data-view="products"] .site-header{z-index:240!important}
+#about,#contact,.about-section,.contact-section{scroll-margin-top:clamp(24px,8vh,95px)}
+html{scroll-behavior:auto}
+/* Replace the entire old sample gallery; no styles or selected state should occupy space. */
+.travel-gallery,.travel-gallery-options,.travel-option{display:none!important}
+/* One motion language: Event Horizon Iris. The route changes while the iris masks the screen. */
+#rift-transition{position:fixed!important;inset:0!important;z-index:3000!important;overflow:hidden;visibility:hidden!important;opacity:0!important;pointer-events:none!important;display:block!important;background:transparent!important;contain:layout paint;transition:none!important}
+#rift-transition.is-active{visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+#rift-transition>span{position:absolute!important;pointer-events:none!important;will-change:transform,opacity}
+#rift-transition .tai-transition-backdrop{inset:0!important;left:0!important;top:0!important;width:100%;height:100%;opacity:0!important;background:radial-gradient(circle at center,rgba(20,8,47,.94) 5%,rgba(11,8,35,.98) 52%,#060614 100%)!important;transition:opacity .50s cubic-bezier(.25,.1,.24,1)!important}
+#rift-transition.is-active .tai-transition-backdrop{opacity:1!important}
+#rift-transition.is-active.is-revealing .tai-transition-backdrop{opacity:0!important;transition-duration:.64s!important}
+#rift-transition .tai-transition-iris{position:absolute!important;left:50%!important;top:50%!important;width:min(70vmin,620px)!important;height:min(70vmin,620px)!important;margin:0!important;border-radius:50%!important;opacity:0!important;border:2px solid rgba(145,243,255,.95)!important;box-shadow:0 0 26px #7ee8ff65,inset 0 0 25px #ad6df865!important;background:radial-gradient(circle,#101024d1 0%,#4722729c 42%,#80e8ff16 69%,transparent 74%)!important;transform:translate(-50%,-50%) scale(.18)!important;filter:none!important;animation:none!important;transition:transform .52s cubic-bezier(.26,.8,.38,1),opacity .36s ease!important}
+#rift-transition.is-active .tai-transition-iris{opacity:1!important;transform:translate(-50%,-50%) scale(1.12)!important}
+#rift-transition.is-active.is-revealing .tai-transition-iris{opacity:0!important;transform:translate(-50%,-50%) scale(2.5)!important;transition:transform .65s cubic-bezier(.15,.75,.27,1),opacity .51s ease!important}
+#rift-transition .tai-transition-iris-halo{left:50%!important;top:50%!important;width:min(80vmin,710px);height:min(80vmin,710px);border-radius:50%;border:1px solid #d0a5ff77;box-shadow:0 0 34px #8a6cf76b;opacity:0!important;transform:translate(-50%,-50%) scale(.2)!important;transition:opacity .3s,transform .62s cubic-bezier(.22,.68,.3,1)!important}
+#rift-transition.is-active .tai-transition-iris-halo{opacity:.75!important;transform:translate(-50%,-50%) scale(1)!important}
+#rift-transition.is-active.is-revealing .tai-transition-iris-halo{opacity:0!important;transform:translate(-50%,-50%) scale(2.3)!important}
+#rift-transition .tai-transition-stellar-core{left:50%!important;top:50%!important;width:54px;height:54px;opacity:0!important;transform:translate(-50%,-50%) scale(.2)!important;clip-path:polygon(50% 0,59% 39%,100% 50%,59% 61%,50% 100%,41% 61%,0 50%,41% 39%);background:linear-gradient(135deg,#fff,#8af4ff,#dba3fa);filter:none!important}
+#rift-transition.is-active .tai-transition-stellar-core{animation:taiV24Core 1.18s ease-in-out both!important}
+@keyframes taiV24Core{0%,28%{opacity:0;transform:translate(-50%,-50%) scale(.15)}40%{opacity:.8;transform:translate(-50%,-50%) scale(.72)}52%{opacity:1;transform:translate(-50%,-50%) scale(1.4)}72%{opacity:.25;transform:translate(-50%,-50%) scale(2.3)}100%{opacity:0;transform:translate(-50%,-50%) scale(3.2)}}
+/* A clean nucleus, without text or badges. */
+#v14-constellation .v14-skyline{display:none!important}
+#v14-constellation .v14-orbit-core{position:absolute;left:50%;top:50%;width:92px;height:92px;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;z-index:2;background:radial-gradient(circle at 38% 35%,#e2faff 0 6%,#7ff5ff 12%,#9842fa 36%,#23135b 57%,transparent 72%);box-shadow:0 0 25px #8c5dff7a,inset 0 0 28px #a6fbff4f}
+.electron-trail-field{z-index:2;pointer-events:none}
+.electron-tail-group{pointer-events:none}.electron-comet-path{filter:drop-shadow(0 0 3px #6af6ff91);stroke-dasharray:none;stroke-linejoin:round}.electron-comet-halo{stroke-linejoin:round}
+/* Mood chips: glyph and label align to a single centreline. */
+#v14-mood-buttons{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px!important;align-items:stretch}
+#v14-mood-buttons .v14-mood-button{width:100%;min-width:0;min-height:64px;display:flex!important;flex-direction:row;align-items:center!important;justify-content:center!important;gap:12px!important;padding:12px 13px!important;line-height:1.35!important;white-space:normal;text-align:center}
+#v14-mood-buttons .v14-mood-glyph{flex:0 0 28px;width:28px;height:28px;display:grid!important;place-items:center;line-height:1!important;font-size:1.25rem;align-self:center}
+#v14-mood-buttons .v14-mood-label{display:block;min-width:0;line-height:1.4;align-self:center;margin:0!important;transform:none!important;font-size:clamp(12px,1vw,14px);white-space:normal;overflow-wrap:anywhere}
+/* Equal-height main player and playlist on wide layouts. */
+@media(min-width:1101px){
+ .music-layout{align-items:stretch!important;grid-template-columns:minmax(0,1.32fr) minmax(0,.95fr)!important;gap:23px}
+ .music-layout>.player-surface,.music-layout>.library-surface{height:100%;min-height:650px!important;max-height:none!important;box-sizing:border-box}
+ .music-layout>.player-surface{grid-template-columns:minmax(0,39%) minmax(0,61%)!important}
+ .music-layout .player-right{justify-content:space-between;gap:16px;padding:30px}
+ .music-layout .karaoke-panel{flex:1;min-height:270px}
+ .music-layout .lyrics-viewport{height:auto;max-height:340px;min-height:215px;flex:1}
+ .music-layout>.library-surface{display:flex;flex-direction:column;gap:7px;padding:29px}
+ .music-layout .library-tools{margin:16px 0 12px}
+ .music-layout .track-list{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px}
+ .music-layout .track-row{min-height:70px}
+ .music-layout .library-footnote{margin-top:auto}
+}
+@media(min-width:701px) and (max-width:1100px){#v14-mood-buttons{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){#v14-mood-buttons{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px!important}#v14-mood-buttons .v14-mood-button{min-height:61px;padding:12px 10px!important;gap:10px!important}#v14-mood-buttons .v14-mood-button:last-child:nth-child(odd){grid-column:1/-1;max-width:300px;justify-self:center}.music-layout>.library-surface{height:auto!important;min-height:0!important}.music-layout>.player-surface{height:auto!important}}
+@media(max-width:370px){#v14-mood-buttons .v14-mood-label{font-size:12px}}
+@media(prefers-reduced-motion:reduce){#rift-transition,#rift-transition>span{animation:none!important;transition:none!important}}
+/* Remove legacy pseudo portal surfaces entirely so only the iris artwork renders. */
+#rift-transition::before,#rift-transition::after{content:none!important;display:none!important}
